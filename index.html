@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://guohui8.github.io">
   <title>Guohui的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="江西师范大学12级，程序媛鼓励师、精神慈善家、装逼爱好者。">
+  <meta name="description" content="程序媛鼓励师、精神慈善家、装逼爱好者。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Guohui的博客">
 <meta property="og:url" content="https://guohui8.github.io/index.html">
 <meta property="og:site_name" content="Guohui的博客">
-<meta property="og:description" content="江西师范大学12级，程序媛鼓励师、精神慈善家、装逼爱好者。">
+<meta property="og:description" content="程序媛鼓励师、精神慈善家、装逼爱好者。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Guohui的博客">
-<meta name="twitter:description" content="江西师范大学12级，程序媛鼓励师、精神慈善家、装逼爱好者。">
+<meta name="twitter:description" content="程序媛鼓励师、精神慈善家、装逼爱好者。">
   
     <link rel="alternative" href="/atom.xml" title="Guohui的博客" type="application/atom+xml">
   
@@ -174,65 +174,70 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-JavaScript归纳点一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-vuex学习实践笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/02/JavaScript归纳点一/">JavaScript归纳点一</a>
+      <a class="article-title" href="/2017/06/19/vuex学习实践笔记/">vuex学习实践笔记</a>
     </h1>
   
 
         
-        <a href="/2017/04/02/JavaScript归纳点一/" class="archive-article-date">
-  	<time datetime="2017-04-02T02:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-02</time>
+        <a href="/2017/06/19/vuex学习实践笔记/" class="archive-article-date">
+  	<time datetime="2017-06-19T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>群里碰到2018届的同学问的问题，不仔细想想还真摸不着头脑，于是想着开始整理Javascript的知识点。</p>
-<h2 id="1-变量作用域"><a href="#1-变量作用域" class="headerlink" title="1. 变量作用域"></a>1. 变量作用域</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 2</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div></pre></td></tr></table></figure>
+        <h3 id="Vuex是什么？"><a href="#Vuex是什么？" class="headerlink" title="Vuex是什么？"></a><strong>Vuex是什么？</strong></h3><blockquote>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</p>
+</blockquote>
+<p>栗如(travel store)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">import * as types from &apos;../types&apos;</div><div class="line">//数据</div><div class="line">const state = &#123;</div><div class="line">    travelsList: [],</div><div class="line">    searchKey: &#123;</div><div class="line">        page: 0,</div><div class="line">        limit: 20</div><div class="line">    &#125;,</div><div class="line">    scroll: true</div><div class="line">&#125;</div><div class="line">//用户行为(可以处理异步),触发 mutations 来改变 state</div><div class="line">const actions = &#123;</div><div class="line">    /**</div><div class="line">     * 获取约跑步列表</div><div class="line">     */</div><div class="line">    getTravelsList(&#123; commit &#125;) &#123;</div><div class="line">        if(state.scroll) &#123;</div><div class="line">            commit(types.GET_TRAVELS_PAGE_NUM)</div><div class="line">            commit(types.COM_LOADING_STATUS, true),</div><div class="line">            commit(types.GET_TRAVELS_SCORLL_STATUS, false)</div><div class="line">            api.TravelsList()</div><div class="line">                .then(res =&gt; &#123;</div><div class="line">                    console.log(res)</div><div class="line">                    commit(types.COM_LOADING_STATUS, false),</div><div class="line">                    commit(types.GET_TRAVELS_SCORLL_STATUS, true)</div><div class="line">                    commit(types.GET_TRAVELS_LIST, res)</div><div class="line">                &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    /**</div><div class="line">     * 参加</div><div class="line">     */</div><div class="line">    joinTravel(&#123; commit &#125;, id) &#123;</div><div class="line">		...</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//可以过滤 state 中的数据</div><div class="line">const getters = &#123;</div><div class="line">    travelsList: state =&gt; state.travelsList,</div><div class="line">    travelListIndex: state =&gt; state.travelsList.slice(0,4)</div><div class="line">&#125;</div><div class="line">//唯一能改变 state 的方法(纯函数)</div><div class="line">const mutations = &#123;</div><div class="line">    [types.GET_TRAVELS_LIST](state, res) &#123;</div><div class="line">        if(state.searchKey.page &lt;= 1) &#123;</div><div class="line">            state.travelsList = res.data</div><div class="line">        &#125; else &#123;</div><div class="line">            state.travelsList = state.travelsList.concat(res.data)</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    [types.GET_TRAVELS_SEARCH_KEY](state, params) &#123;</div><div class="line">        state.searchKey = params</div><div class="line">    &#125;,</div><div class="line">    [types.GET_TRAVELS_PAGE_NUM](state) &#123;</div><div class="line">        state.searchKey[&apos;page&apos;] += 1</div><div class="line">    &#125;,</div><div class="line">    [types.GET_TRAVELS_SCORLL_STATUS](state, status) &#123;</div><div class="line">        state.scroll = status</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//导出一个 travel store 模块</div><div class="line">export default &#123;</div><div class="line">    state,</div><div class="line">    actions,</div><div class="line">    getters,</div><div class="line">    mutations</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每一个 Vuex 应用的核心就是 store（仓库）。”store” 基本上就是一个容器，它包含着你的应用中大部分的状态(state)数据。</p>
+<blockquote>
 <ul>
-<li><p>上方的函数作用域中声明并赋值了a，且在console之上，所以遵循就近原则输出a等于2</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test2</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// undefined</span></div><div class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line">test2();</div></pre></td></tr></table></figure>
-</li>
-<li><p>上方的函数作用域中虽然声明并赋值了a，但位于console之下，a变量被提升，输出时已声明但尚未被赋值，所以输出undefined。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test3</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 1</span></div><div class="line">    a = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line">test3();</div></pre></td></tr></table></figure>
-</li>
-<li><p>上方的函数作用域中a被重新赋值，未被重新声明，且位于console之下，所以输出全局作用域中的a。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test4</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(b); <span class="comment">// b is not defined</span></div><div class="line">    <span class="keyword">let</span> b = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line">test4();</div></pre></td></tr></table></figure>
-</li>
-<li><p>上方函数作用域中使用了ES6的let重新声明了变量b，而let不同于var其不存在变量提升的功能，所以输出报错b is not defined。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test5</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> a = <span class="number">1</span>;</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">let</span> a = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 1</span></div><div class="line">&#125;</div><div class="line">test5();</div></pre></td></tr></table></figure>
-</li>
-<li><p>上方的函数作用域中用let声明了a为1，并在块级作用域中声明了a为2，因为console并不在函数内的块级作用域中，所以输出1。</p>
-</li>
+<li>Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</li>
+<li>你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地提交(commit) mutations。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。</li>
 </ul>
-<h2 id="2-类型比较"><a href="#2-类型比较" class="headerlink" title="2. 类型比较"></a>2. 类型比较</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [],</div><div class="line">    arr2 = [<span class="number">1</span>];</div><div class="line"><span class="built_in">console</span>.log(arr === arr2); <span class="comment">// false</span></div></pre></td></tr></table></figure>
-<p>上方两个不同的数组比较，console为false。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [],</div><div class="line">    arr2 = [];</div><div class="line"><span class="built_in">console</span>.log(arr === arr2); <span class="comment">// false</span></div></pre></td></tr></table></figure>
-<p>上方两个相同的数组比较，因为两个单独的数组永不相等，所以console为false。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [],</div><div class="line">    arr2 = &#123;&#125;;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(arr) === <span class="keyword">typeof</span>(arr2)); <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p>上方利用typeof比较数组和对象，因为typeof获取NULL、数组、对象的类型都为object，所以console为true。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="built_in">console</span>.log(arr <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(arr <span class="keyword">instanceof</span> <span class="built_in">Array</span>); <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p>上方利用instanceof判断一个变量是否属于某个对象的实例，因为在JavaScript中数组也是对象的一种，所以两个console都为true。</p>
-<h2 id="3-this指向"><a href="#3-this指向" class="headerlink" title="3. this指向"></a>3. this指向</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'xiaoming'</span>,</div><div class="line">    <span class="attr">getName</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(obj.getName());  <span class="comment">// 'xiaoming'</span></div></pre></td></tr></table></figure>
-<p>上方对象方法中的this指向对象本身，所以输出xiaoming。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">myName</span>: <span class="string">'xiaoming'</span>,</div><div class="line">    <span class="attr">getName</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.myName</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> nameFn = obj.getName;</div><div class="line"><span class="built_in">console</span>.log(nameFn()); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
-<p>上方将对象中的方法赋值给了一个变量，此时方法中的this也将不再指向obj对象，从而指向window对象，所以console为undefined。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">myName</span>: <span class="string">'xiaoming'</span>,</div><div class="line">    <span class="attr">getName</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.myName</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> obj2 = &#123;</div><div class="line">    <span class="attr">myName</span>: <span class="string">'xiaohua'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> nameFn = obj.getName;</div><div class="line"><span class="built_in">console</span>.log(nameFn.apply(obj2)); <span class="comment">// 'xiaohua</span></div></pre></td></tr></table></figure>
-<p>上方同样将obj对象中的方法赋值给了变量nameFn，但是通过apply方法将this指向了obj2对象，所以最终console为xiaohua。</p>
-<h2 id="4-函数参数"><a href="#4-函数参数" class="headerlink" title="4. 函数参数"></a>4. 函数参数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test6</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)); <span class="comment">// [1, 2]</span></div><div class="line">&#125;</div><div class="line">test6(<span class="number">1</span>, <span class="number">2</span>);</div></pre></td></tr></table></figure>
-<p>上方利用函数中的arguments类数组对象获取传入函数的参数数组，所以输出数组[1, 2]。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test7</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)); <span class="comment">// 未执行到此，无输出</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">test7(<span class="number">1</span>, <span class="number">2</span>);</div></pre></td></tr></table></figure>
-<p>上方同样利用arguments获取参数，但因test7(1, 2)未执行return中的函数，所以无输出。若执行test7(1, 2)(3, 4)则会输出[3, 4]。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> args = [<span class="number">1</span>, <span class="number">2</span>];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test9</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)); <span class="comment">// [1, 2, 3, 4]</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">Array</span>.prototype.push.call(args, <span class="number">3</span>, <span class="number">4</span>);</div><div class="line">test9(...args);</div></pre></td></tr></table></figure>
-<p>上方利用Array.prototype.push.call()方法向args数组中插入了3和4，并利用ES6延展操作符(…)将数组展开并传入test9，所以console为[1, 2, 3, 4]。</p>
-
+</blockquote>
+<p>用一张图来理解一下<br><img src="http://omt3u4bph.bkt.clouddn.com/vuex2.jpg" alt="vuex"></p>
+<blockquote>
+<p>客户端(Client) -&gt; action -&gt; mutations -&gt; state -&gt; 客户端</p>
+</blockquote>
+<p>可以看出在vuex中数据是单一流向的：视图(view)触发action，action提交(commit)到mutations，mutations改变state(数据)，state的改变，相应的组件也会相应的更新。</p>
+<h3 id="1-State"><a href="#1-State" class="headerlink" title="1.State"></a><strong>1.State</strong></h3><blockquote>
+<p>单一状态树，唯一数据源，能够直接清晰的读懂数据的结构。</p>
+</blockquote>
+<h4 id="1-1在-Vue-组件中获得数据"><a href="#1-1在-Vue-组件中获得数据" class="headerlink" title="1.1在 Vue 组件中获得数据"></a>1.1在 Vue 组件中获得数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//store</div><div class="line">const state = &#123;</div><div class="line">    travelsList: [],</div><div class="line">    searchKey: &#123;</div><div class="line">        page: 0,</div><div class="line">        limit: 20</div><div class="line">    &#125;,</div><div class="line">    scroll: true</div><div class="line">&#125;</div><div class="line">//在view中直接获取</div><div class="line">data () &#123; </div><div class="line">	return &#123;</div><div class="line">    	scroll: this.$store.state.scroll</div><div class="line">	&#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<h4 id="1-2mapState-辅助函数"><a href="#1-2mapState-辅助函数" class="headerlink" title="1.2mapState 辅助函数"></a>1.2mapState 辅助函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">computed: mapState([</div><div class="line">	// 映射 this.scroll 为 this.$store.state.scroll</div><div class="line">	&apos;scroll&apos;</div><div class="line">])</div><div class="line">//或对象展开运算符</div><div class="line">computed: &#123;</div><div class="line">	...mapState(&#123;</div><div class="line">		&apos;scroll&apos;</div><div class="line">	&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-Getters"><a href="#2-Getters" class="headerlink" title="2.Getters"></a><strong>2.Getters</strong></h3><blockquote>
+<p>对state数据进行过滤或直接返回</p>
+</blockquote>
+<h4 id="2-1在-Vue-组件中获得Getters数据"><a href="#2-1在-Vue-组件中获得Getters数据" class="headerlink" title="2.1在 Vue 组件中获得Getters数据"></a>2.1在 Vue 组件中获得Getters数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//store</div><div class="line">const getters = &#123;</div><div class="line">    travelsList: state =&gt; state.travelsList,</div><div class="line">    travelListIndex: state =&gt; state.travelsList.slice(0,4)</div><div class="line">&#125;</div><div class="line">//在view中直接获取</div><div class="line">data () &#123; </div><div class="line">    return &#123;</div><div class="line">        travelListIndex: this.$store.getters.travelListIndex</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<h4 id="2-2mapGetters-辅助函数"><a href="#2-2mapGetters-辅助函数" class="headerlink" title="2.2mapGetters 辅助函数"></a>2.2mapGetters 辅助函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">computed: mapGetters([</div><div class="line">    // 映射 this.travelListIndex 为 this.$store.state.travelListIndex</div><div class="line">    &apos;travelListIndex&apos;</div><div class="line">])</div><div class="line">//或对象展开运算符</div><div class="line">computed: &#123;</div><div class="line">    ...mapGetters(&#123;</div><div class="line">        &apos;travelListIndex&apos;</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-Mutations"><a href="#3-Mutations" class="headerlink" title="3.Mutations"></a><strong>3.Mutations</strong></h3><blockquote>
+<p>要更改 Vuex 的 store 中的数据，唯一方法是提交 mutation。每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行数据更改的地方。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">const mutations = &#123;</div><div class="line">    //使用常量替代 Mutation 事件类型</div><div class="line">    [types.GET_TRAVELS_LIST](state, res) &#123;</div><div class="line">        if(state.searchKey.page &lt;= 1) &#123;</div><div class="line">            state.travelsList = res.data</div><div class="line">        &#125; else &#123;</div><div class="line">            state.travelsList = state.travelsList.concat(res.data)</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>当我们在这改变数据时，其它引用此state数据的 Vue 组件也会自动得到更新。</p>
+</blockquote>
+<h3 id="4-Actions"><a href="#4-Actions" class="headerlink" title="4.Actions"></a><strong>4.Actions</strong></h3><blockquote>
+<p>用户的一些行为，来提交到mutations改变数据。可在这进行异步操作。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">const actions = &#123;</div><div class="line">    //es6的参数解构</div><div class="line">    getTravelsList(&#123; commit &#125;) &#123;</div><div class="line">        if(state.scroll) &#123;</div><div class="line">            commit(types.GET_TRAVELS_PAGE_NUM)</div><div class="line">            commit(types.COM_LOADING_STATUS, true),</div><div class="line">            commit(types.GET_TRAVELS_SCORLL_STATUS, false)</div><div class="line">            api.TravelsList()</div><div class="line">                .then(res =&gt; &#123;</div><div class="line">                    console.log(res)</div><div class="line">                    commit(types.COM_LOADING_STATUS, false),</div><div class="line">                    commit(types.GET_TRAVELS_SCORLL_STATUS, true)</div><div class="line">                    commit(types.GET_TRAVELS_LIST, res)</div><div class="line">                &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    joinTravel(&#123; commit &#125;, id) &#123;</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="4-1分发-Action"><a href="#4-1分发-Action" class="headerlink" title="4.1分发 Action"></a>4.1分发 Action</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">created() &#123;</div><div class="line">    if (this.travelListIndex.length == 0) &#123;</div><div class="line">        this.$store.dispatch(&apos;getTravelsList&apos;)</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<h4 id="4-2mapActions-辅助函数"><a href="#4-2mapActions-辅助函数" class="headerlink" title="4.2mapActions 辅助函数"></a>4.2mapActions 辅助函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">methods: &#123;</div><div class="line">    ...mapActions([</div><div class="line">      &apos;getTravelsList&apos; // 映射 this.getTravelsList() 为 this.$store.dispatch(&apos;getTravelsList&apos;)</div><div class="line">    ]),</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-Modules"><a href="#5-Modules" class="headerlink" title="5.Modules"></a><strong>5.Modules</strong></h3><blockquote>
+<p>当应用变得很大时，store 对象会变得臃肿不堪。为了解决这个问题，Vuex 允许我们将 store 分割到模块（module）。每个模块拥有自己的 state、mutation、action、getters</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">const moduleA = &#123;</div><div class="line">  state: &#123; ... &#125;,</div><div class="line">  mutations: &#123; ... &#125;,</div><div class="line">  actions: &#123; ... &#125;,</div><div class="line">  getters: &#123; ... &#125;</div><div class="line">&#125;</div><div class="line">const moduleB = &#123;</div><div class="line">  state: &#123; ... &#125;,</div><div class="line">  mutations: &#123; ... &#125;,</div><div class="line">  actions: &#123; ... &#125;</div><div class="line">&#125;</div><div class="line">const store = new Vuex.Store(&#123;</div><div class="line">  modules: &#123;</div><div class="line">    a: moduleA,</div><div class="line">    b: moduleB</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">store.state.a // -&gt; moduleA 的状态</div><div class="line">store.state.b // -&gt; moduleB 的状态</div></pre></td></tr></table></figure>
       
 
       
@@ -255,7 +260,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/02/JavaScript归纳点一/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/19/vuex学习实践笔记/">展开全文 >></a>
         </p>
       
 
@@ -273,228 +278,34 @@
 
 
   
-    <article id="post-Hello World" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-跟大师学摄影" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/30/Hello World/">Hello World</a>
+      <a class="article-title" href="/2017/05/02/跟大师学摄影/">跟大师学摄影</a>
     </h1>
   
 
         
-        <a href="/2017/03/30/Hello World/" class="archive-article-date">
-  	<time datetime="2017-03-30T02:59:01.573Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-30</time>
+        <a href="/2017/05/02/跟大师学摄影/" class="archive-article-date">
+  	<time datetime="2017-05-02T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p><img src="https://raw.githubusercontent.com/guohui8/OnlineAlbum/master/blogImage/020.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/guohui8/OnlineAlbum/master/blogImage/021.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/guohui8/OnlineAlbum/master/blogImage/022.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/guohui8/OnlineAlbum/master/blogImage/023.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/guohui8/OnlineAlbum/master/blogImage/024.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/guohui8/OnlineAlbum/master/blogImage/025.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/guohui8/OnlineAlbum/master/blogImage/026.jpg" alt=""></p>
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/30/Hello World/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-我是技术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/30/我是技术/">我是技术</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/30/我是技术/" class="archive-article-date">
-  	<time datetime="2016-03-30T02:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。<br>
-        
-          <a class="article-more-a" href="/2016/03/30/我是技术/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/30/我是技术/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-我是随笔" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/13/我是随笔/">我是随笔</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/13/我是随笔/" class="archive-article-date">
-  	<time datetime="2016-03-13T02:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。<br>
-        
-          <a class="article-more-a" href="/2016/03/13/我是随笔/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/13/我是随笔/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-我是相册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/13/我是相册/">我是相册</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/13/我是相册/" class="archive-article-date">
-  	<time datetime="2016-03-13T02:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。土耳其内阁高官为即将举行的公投拉票，兵分多路前往欧洲国家进行演讲，却屡次碰壁。11日，土耳其外交部长梅夫吕特·恰武什奥卢的航班在荷兰降落遭拒后，另一名部长从德国乘车进入荷兰境内遭到拦截，12日晨被送回德国边境。土耳其外交部消息人士称，连续发生摩擦后，土耳其方面出于安全考虑，暂时封锁了荷兰驻土耳其的使领馆。<br>
-        
-          <a class="article-more-a" href="/2016/03/13/我是相册/#more">more >></a>
-        
       
 
       
@@ -517,7 +328,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/13/我是相册/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/02/跟大师学摄影/">展开全文 >></a>
         </p>
       
 
@@ -535,6 +346,582 @@
 
 
   
+    <article id="post-时光里，我们都是赶路人" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/03/时光里，我们都是赶路人/">时光里，我们都是赶路人</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/03/时光里，我们都是赶路人/" class="archive-article-date">
+  	<time datetime="2017-04-03T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　慢慢觉着时光开始沉淀了，如一抹繁华的艳阳，从夏日旁晚清凉的池塘中滑落，悄然走进了秋日的诗行。彼处，依旧是微风不燥，岁月静好。万里黄沙之上，依旧有人沉腕拨镫，疾书一行字：“相忘于江湖”。其实在光阴里，我们都是赶路人，终归有一天日子将会过得如烟火湮灭那般平静且丰盈。正如微风，拂过草地上的清露，在林间流动之际，那些路边的小花儿开也不再张扬。</p>
+<p>　　素白的光阴里，短暂的相遇邂逅，我们转身便策马扬鞭，奔向远方。而在时光荏苒里随心事渐渐寂寞的日子里，谁又繁华了悲伤，疼痛了幸福。最后，又是谁背负着沉重的枷锁，固守仅存的坚持，明知无望却忍着寂寥划过了逆流的哀痛，终于嗅到了春。</p>
+<p>　　曾经，我们都不停奔赴着自己最美的风景，却一直在放弃。暮然回首之际，夜幕却依旧如期降临，举目四望，偌大的桌边只我一人，空对，一盏冰冷的茶。才明白那些曾相伴走过一遭的人，那些当初索然无味的问候，那些毫无方向的旅途，那些种种过往的云烟，原来才是这世间的所有懂得的馈赠，也许只有光阴知道，桃之夭夭灼灼其华的默契，日久弥深，却又宛如初见，忽尔盛开，。</p>
+<p>　　每每念起沈园遗梦，心中倍感凄凉。时常做想悠游放荡如陆游在遇上唐婉那一刹间，眼帘中饱含是情、是怨、是思、还是怜。如若是我，定会上前一步，浅浅微笑，谢谢你给了我这一段清浅的韶光，愿你别空负了我的流年。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/03/时光里，我们都是赶路人/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-webpack工程化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/26/webpack工程化/">webpack工程化</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/26/webpack工程化/" class="archive-article-date">
+  	<time datetime="2017-03-26T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、webpack是什么"><a href="#一、webpack是什么" class="headerlink" title="一、webpack是什么"></a>一、webpack是什么</h3><blockquote>
+<p>webpack is a module bundler. webpack takes modules with dependencies and generates static assets representing those modules</p>
+</blockquote>
+<p>webpack 是一个模块打包工具，输入为包含依赖关系的模块集，输出为打包合并的前端静态资源。在上一节的前端工程化中，已经介绍过，webpack 是同时支持 AMD 和 CommonJs 的模块定义方式，不仅如此，webpack 可以将任何前端资源视为模块，如 css，图片，文本。</p>
+<h3 id="二、为什么要使用它"><a href="#二、为什么要使用它" class="headerlink" title="二、为什么要使用它"></a>二、为什么要使用它</h3><p>在 webpack 出现之前，已经有了一些打包工具，如 Browserify、grunt、gulp… 这些打包工具工具功能单一，只能完成特定的任务，然而 web 前端工程是复杂的，一个 webapp 对于业务代码的要求可能有：</p>
+<blockquote>
+<ul>
+<li>代码可以分块，实现按需加载</li>
+<li>首屏加载时间要尽量减少</li>
+<li>需要集成一些第三方库</li>
+</ul>
+</blockquote>
+<p>webpack 的出现正式为了解决这些问题，在 webpack 中，提供了一下这些功能：</p>
+<p><strong>1.代码分块：</strong> webpack 有两种类型的模块依赖，一种是同步的，一种是异步的。在打包的过程中可以将代码输出为代码块（chunk），代码块可以实现按需加载。 异步加载的代码块通过分割点（spliting point）来确定。<br><strong>2.Loaders：</strong> Webpack 本身只会处理 Javascript，为了实现将其他资源也定义为模块，并转化为 Javascript， Webpack 定义 loaders , 不同的 loader 可以将对应的资源转化为 Javascript 模块。<br><strong>3.智能的模块解析：</strong> webpack 可以很容易将第三方库转化为模块集成到项目代码中，模块的依赖可以用表达式的方式（这在其他打包工具中是没有支持的），这种模块依赖叫做动态模块依赖。<br><strong>4.插件系统：</strong> webpack 的可定制化在于其插件系统，其本身的很多功能也是通过插件的方式实现，插件系统形成了 webpack 的生态，是的可以使用很多开源的第三方插件。</p>
+<h3 id="三、webpack-核心思想"><a href="#三、webpack-核心思想" class="headerlink" title="三、webpack 核心思想"></a>三、webpack 核心思想</h3><p><strong>1.万物皆模块：</strong> 在 webpack 的世界中，除了 Javascript，其他任何资源都可以当做模块的方式引用。<br><strong>2.按需加载：</strong> webapp 的优化关键在于代码体积，当应用体积增大，实现代码的按需加载是毕需，这也是 webpack 出现的根本原因。<br><strong>3.可定制化：</strong> 任何一个工具都不可能解决所有问题，提供解决方案才是最可行的，webpack 基于可定制化的理念构建，通过插件系统，配置文件，可以实现大型项目的定制需求。</p>
+<h3 id="四、安装配置"><a href="#四、安装配置" class="headerlink" title="四、安装配置"></a>四、安装配置</h3><p>在此之前你应该已经安装了 node.js.</p>
+<p>全局安装webapck或webpack-dev-server(开启一个本地服务)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install webpack -g</div><div class="line">$ npm install webpack-dev-server -g</div></pre></td></tr></table></figure>
+<p>在项目中安装webpack和webpack-dev-server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install webpack --save-dev</div><div class="line">$ npm install webpack-dev-server --save-dev</div></pre></td></tr></table></figure>
+<p><strong>webpack使用</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//name.js</div><div class="line">let name = &apos;hzzly&apos;</div><div class="line">export default name</div><div class="line"></div><div class="line">//index.js</div><div class="line">import name from &apos;./name&apos;</div><div class="line">document.getElementById(&apos;app&apos;).textContent = `hello~$&#123;name&#125;`</div></pre></td></tr></table></figure>
+<p>1.命令行的使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ webpack src/index.js dist/bundle.js</div></pre></td></tr></table></figure>
+<blockquote>
+<p>语法：webpack 要打包的文件 打包输出的文件</p>
+</blockquote>
+<p>2.配置文件的使用<br>在项目目录下创建 webpack.config.js如下(简单的配置)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">var webpack = require(&apos;webpack&apos;)</div><div class="line">module.exports = &#123;</div><div class="line">  entry: &apos;./src/index.js&apos;,  //入口</div><div class="line">  output: &#123;</div><div class="line">    path: &apos;./dist/&apos;,    //输出路径</div><div class="line">    filename: &apos;bundle.js&apos;   //输出文件名</div><div class="line">  &#125;,</div><div class="line">  module: &#123;</div><div class="line">    loaders: [</div><div class="line">      &#123;</div><div class="line">        test: /\.js[x]?$/,</div><div class="line">        exclude: /node_modules/,</div><div class="line">        loader: &apos;babel-loader&apos;,  //处理.js或.jsx文件loader</div><div class="line">        query: &#123;</div><div class="line">          presets: [&apos;env&apos;]</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        test: /\.css$/,</div><div class="line">        loader: &quot;style-loader!css-loader&quot;   //处理.css文件loader</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        test: /\.(png|jpg)$/,</div><div class="line">        loader: &apos;url-loader?limit=8192&apos;    //处理图片loader</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ webpack</div><div class="line">//或开启本地服务器并实时监听文件变化</div><div class="line">$ webpack-dev-server --inline --colors --hot</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/26/webpack工程化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Promise的那些事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/Promise的那些事/">Promise的那些事</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/15/Promise的那些事/" class="archive-article-date">
+  	<time datetime="2017-03-15T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="说说promise"><a href="#说说promise" class="headerlink" title="说说promise"></a>说说promise</h1><blockquote>
+<p>Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。</p>
+</blockquote>
+<p>所谓Promise，简单说就是一个容器(对象)，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。</p>
+<p>接触过promise的的都知道它的应用场景和用途，Promise可以用来避免异步操作函数里的嵌套回调（callback hell）问题，因为解决异步最直接的方法是回调嵌套，将后一个的操作放在前一个操作的异步回调里，但如果操作多了，就会有很多层的嵌套(<strong>回调地狱</strong>)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$.ajax(url1, function(data1)&#123;</div><div class="line">    // do something...</div><div class="line">    $.ajax(url2, function(data2)&#123;</div><div class="line">        // do something...</div><div class="line">        $.ajax(url3, function(data3)&#123;</div><div class="line">            // do something...</div><div class="line">            done(data3); // 返回数据</div><div class="line">        &#125;)</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Promise学术点的描述：</p>
+<blockquote>
+<p>promise代表一个异步操作的执行返回状态，这个执行返回状态在promise对象创建时未必已知。它允许你为异步操作的成功或失败指定处理方法。</p>
+</blockquote>
+<p>这使得异步方法可以像同步方法那样返回值：异步方法会返回一个包含了原返回状态的 promise 对象来替代原返回状态。</p>
+<h1 id="Promise的表现"><a href="#Promise的表现" class="headerlink" title="Promise的表现"></a><strong>Promise的表现</strong></h1><p>如果使用回调方法处理多个操作的异步场景，判断某个操作成功或失败的控制在于声明的匿名函数里面，使用Promise对象则可以重新定义异步执行的状态和控制逻辑。</p>
+<p>promise的最重要的特点就是它把我们处理任何函数调用的成功或者失败的方式规范成了可预测的形式，特别是如果这个调用实际上的异步的。</p>
+<p>Promise中有几个状态：</p>
+<blockquote>
+<ul>
+<li>pending: 初始状态。 非 fulfilled 或 rejected。</li>
+<li>resolved: 成功的操作。也有的成为fulfilled 。</li>
+<li>rejected: 失败的操作。</li>
+</ul>
+</blockquote>
+<p>状态转换关系为：</p>
+<blockquote>
+<p>pending-&gt;resolved(fulfilled)，pending-&gt;rejected。</p>
+</blockquote>
+<p>Promise对象有以下两个特点:</p>
+<blockquote>
+<ul>
+<li>对象的状态不受外界影响，Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）</li>
+<li>一旦状态改变，就不会再变，任何时候都可以得到这个结果。</li>
+</ul>
+</blockquote>
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a><strong>用法</strong></h1><p>说了这么多，直接上代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var promise = new Promise((resolve, reject) =&gt; &#123;</div><div class="line">    // do somthing, maybe async</div><div class="line">    if (success)&#123;</div><div class="line">      return resolve(res);</div><div class="line">    &#125; else &#123;</div><div class="line">      return reject(err);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">promise.then(res =&gt; &#123;</div><div class="line">    // do something... e.g</div><div class="line">    console.log(res);</div><div class="line">&#125;, err =&gt; &#123;</div><div class="line">    // deal the err.</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong>或封装成方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function fetch(data) &#123;</div><div class="line">    return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">        // do somthing, maybe async</div><div class="line">        if (success)&#123;</div><div class="line">            resolve(res);</div><div class="line">        &#125; else &#123;</div><div class="line">            reject(err);</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"> </div><div class="line">fetch(data)</div><div class="line">    .then(res =&gt; &#123;</div><div class="line">        console.log(res)</div><div class="line">    &#125;, err =&gt; &#123;</div><div class="line">        // deal the err.</div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
+<h1 id="异步嵌套回调"><a href="#异步嵌套回调" class="headerlink" title="异步嵌套回调"></a><strong>异步嵌套回调</strong></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">function loadAsync1()&#123;</div><div class="line">    return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">        //异步操作</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            console.log(&apos;异步任务1&apos;);</div><div class="line">            resolve(&apos;异步任务1传过来的值&apos;);</div><div class="line">        &#125;, 2000);</div><div class="line">    &#125;);          </div><div class="line">&#125;</div><div class="line">function loadAsync2(data1)&#123;</div><div class="line">    return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">        //异步操作</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            console.log(&apos;异步任务2&apos;);</div><div class="line">            resolve(&apos;异步任务2传过来的值&apos;);</div><div class="line">        &#125;, 2000);</div><div class="line">    &#125;);          </div><div class="line">&#125;</div><div class="line">function loadAsync3(data2)&#123;</div><div class="line">    return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">        //异步操作</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            console.log(&apos;异步任务3&apos;);</div><div class="line">            resolve(&apos;异步任务3传过来的值&apos;);</div><div class="line">        &#125;, 2000);</div><div class="line">    &#125;);          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有返回值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">loadAsync1()</div><div class="line">    .then(data1 =&gt; &#123;</div><div class="line">        return loadAsync2(data1)</div><div class="line">    &#125;)</div><div class="line">    .then(data2 =&gt; &#123;</div><div class="line">        return loadAsync3(data2)</div><div class="line">    &#125;)</div><div class="line">    .then(okFn, failFn)</div></pre></td></tr></table></figure>
+<p>没有返回值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">loadAsync1()</div><div class="line">    .then(data1 =&gt; &#123;</div><div class="line">        loadAsync2(data1)</div><div class="line">    &#125;)</div><div class="line">    .then(data2 =&gt;&#123;</div><div class="line">        loadAsync3(data2)</div><div class="line">    &#125;)</div><div class="line">    .then(res =&gt; console.log(res))</div></pre></td></tr></table></figure>
+<p>输出的值为：</p>
+<blockquote>
+<p>异步任务1<br>异步任务1传过来的值<br>异步任务2<br>异步任务2传过来的值<br>异步任务3<br>异步任务3传过来的值</p>
+</blockquote>
+<h1 id="promise-all方法"><a href="#promise-all方法" class="headerlink" title="promise.all方法"></a><strong>promise.all方法</strong></h1><blockquote>
+<p>Promise.all 可以接收一个元素为 Promise 对象的数组作为参数，当这个数组里面所有的 Promise 对象都变为 resolve 时，该方法才会返回。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var p1 = new Promise((resolve) =&gt; &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">        resolve(&quot;第一个promise&quot;);</div><div class="line">    &#125;, 3000);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">var p2 = new Promise((resolve) =&gt; &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">        resolve(&quot;第二个promise&quot;);</div><div class="line">    &#125;, 1000);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">Promise.all([p1, p2])</div><div class="line">    .then((result) =&gt; &#123;</div><div class="line">        console.log(result); // [&quot;第一个promise&quot;, &quot;第二个promise&quot;]</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<p>上面的代码中，all接收一个数组作为参数，p1,p2是并行执行的，等两个都执行完了，才会进入到then，all会把所有的结果放到一个数组中返回，所以我们打印出我们的结果为一个数组。</p>
+<blockquote>
+<p>值得注意的是，虽然p2的执行顺序比p1快，但是all会按照参数里面的数组顺序来返回结果。all的使用场景类似于，玩游戏的时候，需要提前将游戏需要的资源提前准备好，才进行页面的初始化。</p>
+</blockquote>
+<h1 id="promise-race方法"><a href="#promise-race方法" class="headerlink" title="promise.race方法"></a><strong>promise.race方法</strong></h1><blockquote>
+<p>Promise.race 可以接收一个元素为 Promise 对象的数组作为参数，这个数组里面所有的 Promise 对象进行竞速，完成一个即可。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">var p1 = new Promise((resolve) =&gt; &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">        console.log(&apos;异步任务1执行完成&apos;);</div><div class="line">        resolve(&quot;第一个promise&quot;);</div><div class="line">    &#125;, 3000);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">var p2 = new Promise((resolve) =&gt; &#123;</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">        console.log(&apos;异步任务2执行完成&apos;);</div><div class="line">        resolve(&quot;第二个promise&quot;);</div><div class="line">    &#125;, 1000);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">Promise.race([p1, p2])</div><div class="line">    .then((result) =&gt; &#123;</div><div class="line">        console.log(result);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">//异步任务2执行完成</div><div class="line">//第二个promise</div><div class="line">//异步任务1执行完成</div></pre></td></tr></table></figure>
+<p>在then里面的回调开始执行时，p1 并没有停止，仍旧在执行。于是再过2秒后，输出了他们结束的标志。</p>
+<p>这个race有什么用呢？使用场景还是很多的，比如我们可以用race给某个异步请求设置超时时间，并且在超时后执行相应的操作，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/请求某个图片资源</div><div class="line">function requestImg()&#123;</div><div class="line">    var p = new Promise(function(resolve, reject)&#123;</div><div class="line">        var img = new Image();</div><div class="line">        img.onload = function()&#123;</div><div class="line">            resolve(img);</div><div class="line">        &#125;</div><div class="line">        img.src = &apos;xxxxxx&apos;;</div><div class="line">    &#125;);</div><div class="line">    return p;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//延时函数，用于给请求计时</div><div class="line">function timeout()&#123;</div><div class="line">    var p = new Promise(function(resolve, reject)&#123;</div><div class="line">        setTimeout(function()&#123;</div><div class="line">            reject(&apos;图片请求超时&apos;);</div><div class="line">        &#125;, 5000);</div><div class="line">    &#125;);</div><div class="line">    return p;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Promise</div><div class="line">    .race([requestImg(), timeout()])</div><div class="line">    .then(function(results)&#123;</div><div class="line">        console.log(results);</div><div class="line">    &#125;)</div><div class="line">    .catch(function(err)&#123;</div><div class="line">        console.log(err);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<p>requestImg函数会异步请求一张图片，我把地址写为”xxxxxx”，所以肯定是无法成功请求到的。timeout函数是一个延时5秒的异步操作。我们把这两个返回Promise对象的函数放进race，于是他俩就会赛跑，如果5秒之内图片请求成功了，那么遍进入then方法，执行正常的流程。如果5秒钟图片还未成功返回，那么timeout就跑赢了，则进入catch，报出“图片请求超时”的信息。</p>
+<h1 id="一道常见面试题"><a href="#一道常见面试题" class="headerlink" title="一道常见面试题"></a>一道常见面试题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">setTimeout(function() &#123;</div><div class="line">    console.log(1)</div><div class="line">&#125;, 0);</div><div class="line"> </div><div class="line">new Promise(function executor(resolve) &#123;</div><div class="line">    console.log(2);</div><div class="line">    for( var i=0 ; i&lt;10000 ; i++ ) &#123;</div><div class="line">        i == 9999 &amp;&amp; resolve();</div><div class="line">    &#125;</div><div class="line">    console.log(3);</div><div class="line">&#125;).then(function() &#123;</div><div class="line">    console.log(4);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">console.log(5);</div><div class="line"></div><div class="line">“2 3 5 4 1”</div></pre></td></tr></table></figure>
+<h1 id="情景"><a href="#情景" class="headerlink" title="情景"></a>情景</h1><p>传入一个token，根据这个token请求一次网络，然后获取用户ID，将获取的用户ID访问数据库，获取用户信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">var request = function (token) &#123;</div><div class="line">    return new Promise((resolve, reject)=&gt; &#123;</div><div class="line">        setTimeout(()=&gt; &#123;</div><div class="line">            token ? resolve(2) : reject(&apos;token error&apos;);</div><div class="line">        &#125;,1000)</div><div class="line">    &#125;);</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">var find = function (id) &#123;</div><div class="line">    return new Promise((resolve, reject)=&gt; &#123;</div><div class="line">        setTimeout(()=&gt; &#123;</div><div class="line">            id ? resolve(id + &apos;-info&apos;) : reject(&apos;id error&apos;);</div><div class="line">        &#125;,1000)</div><div class="line">    &#125;);</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">request(&apos;token&apos;)</div><div class="line">    .then(function (id) &#123;</div><div class="line">        return find(id);</div><div class="line">    &#125;)</div><div class="line">    .then(function (info) &#123;</div><div class="line">        console.log( info);</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">co(function *() &#123;</div><div class="line">    var id = yield request(&apos;token&apos;);</div><div class="line">    var info = yield find(id);</div><div class="line"> </div><div class="line">    console.log(id, info);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">(async function () &#123;</div><div class="line">    var id = await request(&apos;token&apos;);</div><div class="line">    var info = await find(id);</div><div class="line"> </div><div class="line">    console.log(id, info);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/15/Promise的那些事/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Fetch学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/08/Fetch学习笔记/">Fetch学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/08/Fetch学习笔记/" class="archive-article-date">
+  	<time datetime="2017-03-08T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><blockquote>
+<p>与XMLHttpRequest(XHR)类似，fetch()方法允许你发出AJAX请求。区别在于Fetch API使用Promise，因此是一种简洁明了的API，比XMLHttpRequest更加简单易用。</p>
+</blockquote>
+<h2 id="比较XMLHttpRequest（传统Ajax）"><a href="#比较XMLHttpRequest（传统Ajax）" class="headerlink" title="比较XMLHttpRequest（传统Ajax）"></a>比较XMLHttpRequest（传统Ajax）</h2><p>创建步骤：</p>
+<blockquote>
+<ul>
+<li>创建<code>XMLHttpRequest</code>对象，也就是创建一个异步调用对象</li>
+<li>创建一个新的<code>HTTP</code>请求，并指定该<code>HTTP</code>请求的方法、<code>URL</code>及验证信息</li>
+<li>发送<code>HTTP</code>请求</li>
+<li>处理响应，获取异步调用返回的数据</li>
+</ul>
+</blockquote>
+<p>可以发现，主要的不同点在于：传统Ajax使用事件处理器，而不是Promise对象，并且请求的发起完全依赖于xhr对象所提供的方法。</p>
+<h2 id="fetch语法"><a href="#fetch语法" class="headerlink" title="fetch语法"></a>fetch语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">fetch(url)</div><div class="line">	.then(function(response) &#123;</div><div class="line">		return response.json();</div><div class="line">	&#125;)</div><div class="line">	.then(function(data) &#123;</div><div class="line">		console.log(data);</div><div class="line">	&#125;)</div><div class="line">	.catch(function(e) &#123;</div><div class="line">		console.log(&quot;Oops, error&quot;);</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
+<p>使用 ES6 的 <code>箭头函数</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fetch(url)</div><div class="line">	.then(response =&gt; response.json())</div><div class="line">	.then(data =&gt; console.log(data))</div><div class="line">	.catch(e =&gt; console.log(&quot;Oops, error&quot;, e))</div></pre></td></tr></table></figure>
+<p>使用 <code>async/await</code> 来做最终优化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(async function () &#123;</div><div class="line">	try &#123;</div><div class="line">		let response = await fetch(url);</div><div class="line">		let data = response.json();</div><div class="line">		console.log(data);</div><div class="line">	&#125; catch(e) &#123;</div><div class="line">		console.log(&quot;Oops, error&quot;, e);</div><div class="line">	&#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>使用 await 后，<strong>写异步代码就像写同步代码一样爽</strong>。await 后面可以跟 Promise 对象，表示等待 Promise resolve() 才会继续向下执行，如果 Promise 被 reject() 或抛出异常则会被外面的 try…catch 捕获。</p>
+<p>如果还不了解<code>async/await</code>，可以移步👉<a href="https://hzzly.github.io/2017/05/09/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-es6Async%E5%87%BD%E6%95%B0/" target="_blank" rel="external">es6Async</a>这篇博客</p>
+<h2 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">fetch(url, &#123;</div><div class="line">    method: &quot;GET&quot;, //默认</div><div class="line">    headers:&#123;</div><div class="line">    	&quot;Accept&quot;: &quot;application/json, text/plain, */*&quot;</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line">.then(response =&gt; response.json())</div><div class="line">.then(data =&gt; console.log(data))</div><div class="line">.catch(e =&gt; console.log(&quot;Oops, error&quot;, e))</div></pre></td></tr></table></figure>
+<h2 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fetch(url, &#123;</div><div class="line">    method: &quot;POST&quot;,</div><div class="line">    headers: &#123;</div><div class="line">    	&quot;Accept&quot;: &quot;application/json, text/plain, */*&quot;,</div><div class="line">        &quot;Content-type&quot;:&quot;application:/x-www-form-urlencoded; charset=UTF-8&quot;</div><div class="line">    &#125;,</div><div class="line">    body: &quot;name=hzzly&amp;age=22&quot;</div><div class="line">&#125;)</div><div class="line">.then(response =&gt; response.json())</div><div class="line">.then(data =&gt; console.log(data))</div><div class="line">.catch(e =&gt; console.log(&quot;Oops, error&quot;, e))</div></pre></td></tr></table></figure>
+<h2 id="使用Fetch请求发送凭证"><a href="#使用Fetch请求发送凭证" class="headerlink" title="使用Fetch请求发送凭证"></a>使用Fetch请求发送凭证</h2><blockquote>
+<p>要使用Fetch发送带有诸如cookie之类的凭证的请求。你可以在选项对象中将credentials属性值设置为“include”：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fetch(url,&#123;</div><div class="line">	credentials: &quot;include&quot;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h1 id="封装POST请求"><a href="#封装POST请求" class="headerlink" title="封装POST请求"></a>封装POST请求</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//将对象拼接成 name=hzzly&amp;age=22 的字符串形式</div><div class="line">function params(obj) &#123;</div><div class="line">	let result = &apos;&apos;</div><div class="line">	for(let item in obj) &#123;</div><div class="line">		result += `&amp;$&#123;item&#125;=$&#123;obj[item]&#125;`</div><div class="line">	&#125;</div><div class="line">	if(result) &#123;</div><div class="line">		result = result.slice(1)</div><div class="line">	&#125;</div><div class="line">	return result</div><div class="line">&#125;</div><div class="line"></div><div class="line">function post(url, paramsObj) &#123;</div><div class="line">	let result = fetch(url, &#123;</div><div class="line">		methods: &apos;POST&apos;,</div><div class="line">		credentials: &quot;include&quot;</div><div class="line">		headers: &#123;</div><div class="line">	    	&quot;Accept&quot;: &quot;application/json, text/plain, */*&quot;,</div><div class="line">	        &quot;Content-type&quot;:&quot;application:/x-www-form-urlencoded; charset=UTF-8&quot;</div><div class="line">	    &#125;,</div><div class="line">	    body: params(paramsObj)</div><div class="line">	&#125;)</div><div class="line">	return result</div><div class="line">&#125;</div><div class="line"></div><div class="line">let obj = &#123;</div><div class="line">	name: &apos;hzzly&apos;,</div><div class="line">	age: 22</div><div class="line">&#125;</div><div class="line">post(url, obj)</div><div class="line">	.then(response =&gt; response.json())</div><div class="line">	.then(data =&gt; console.log(data))</div><div class="line">	.catch(e =&gt; console.log(&quot;Oops, error&quot;,</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/08/Fetch学习笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-sessionStorage与localStorage" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/06/sessionStorage与localStorage/">sessionStorage与localStorage</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/06/sessionStorage与localStorage/" class="archive-article-date">
+  	<time datetime="2017-02-06T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<ul>
+<li>sessionStorage 数据的存储仅特定于某个会话中，也就是说数据只保持到浏览器关闭，当浏览器关闭后重新打开这个页面时， 之前的存储已经被清除。</li>
+<li>localStorage 是一个持久化的存储，它并不局限于会话。除非主动删除数据，否则数据是永远不会过期的。</li>
+</ul>
+</blockquote>
+<h3 id="一、localStorage和sessionStorage操作"><a href="#一、localStorage和sessionStorage操作" class="headerlink" title="一、localStorage和sessionStorage操作"></a>一、localStorage和sessionStorage操作</h3><blockquote>
+<p>localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
+</blockquote>
+<h3 id="1-setItem存储value"><a href="#1-setItem存储value" class="headerlink" title="1.setItem存储value"></a>1.setItem存储value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.setItem(&quot;name&quot;, &quot;hzzly&quot;);</div><div class="line">localStorage.setItem(&quot;blog&quot;, &quot;hzzly.github.io&quot;);</div></pre></td></tr></table></figure>
+<h3 id="2-getItem获取value"><a href="#2-getItem获取value" class="headerlink" title="2.getItem获取value"></a>2.getItem获取value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let name = sessionStorage.getItem(&quot;name&quot;);</div><div class="line">let blog = localStorage.getItem(&quot;blog&quot;);</div></pre></td></tr></table></figure>
+<h3 id="3-removeItem删除key"><a href="#3-removeItem删除key" class="headerlink" title="3.removeItem删除key"></a>3.removeItem删除key</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.removeItem(&quot;name&quot;);</div><div class="line">localStorage.removeItem(&quot;blog&quot;);</div></pre></td></tr></table></figure>
+<h3 id="4-clear清除所有的key-value"><a href="#4-clear清除所有的key-value" class="headerlink" title="4.clear清除所有的key/value"></a>4.clear清除所有的key/value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.clear();</div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
+<h3 id="5-其他操作方法：点操作和"><a href="#5-其他操作方法：点操作和" class="headerlink" title="5.其他操作方法：点操作和[]"></a>5.其他操作方法：点操作和[]</h3><blockquote>
+<p>web Storage不但可以用自身的setItem,getItem等方便存取，也可以像普通对象一样用点(.)操作符，及[]的方式进行数据存储及读取，像如下的代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">localStorage.name = &quot;hzzly&quot;; </div><div class="line">localStorage[&quot;age&quot;] = &quot;21&quot;; </div><div class="line">sessionStorage.name = &quot;hzzly&quot;; </div><div class="line">sessionStorage[&quot;age&quot;] = &quot;21&quot;;</div><div class="line">//取</div><div class="line">let name1 = localStorage.name</div><div class="line">let age1 = localStorage[&quot;age&quot;]</div><div class="line">let name2 = sessionStorage.name</div><div class="line">let age2 = sessionStorage[&quot;age&quot;]</div></pre></td></tr></table></figure>
+<h3 id="6-localStorage和sessionStorage的key和length属性实现遍历"><a href="#6-localStorage和sessionStorage的key和length属性实现遍历" class="headerlink" title="6.localStorage和sessionStorage的key和length属性实现遍历"></a>6.localStorage和sessionStorage的key和length属性实现遍历</h3><blockquote>
+<p>sessionStorage和localStorage提供的key()和length可以方便的实现存储的数据遍历，例如下面的代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var storage = window.localStorage; </div><div class="line">for (var i=0, len = storage.length; i  &lt;  len; i++)&#123;     </div><div class="line">	let key = storage.key(i);     </div><div class="line">	let value = storage.getItem(key);     </div><div class="line">	console.log(key + &quot;=&quot; + value); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="二、实例"><a href="#二、实例" class="headerlink" title="二、实例"></a>二、实例</h3><blockquote>
+<p>storage只能存储字符串的数据，对于JS中常用的数组或对象却不能直接存储，可以用下面两个方法进行转换：</p>
+<ul>
+<li>JSON.stringify() 用于从一个对象解析出字符串</li>
+<li>JSON.parse() 用于从一个字符串中解析出json对象</li>
+</ul>
+</blockquote>
+<h3 id="1-localStorage-sessionStorage存取数组"><a href="#1-localStorage-sessionStorage存取数组" class="headerlink" title="1.localStorage/sessionStorage存取数组"></a>1.localStorage/sessionStorage存取数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">let language = [&apos;HTML/HTML5&apos;, &apos;CSS/CSS3&apos;, &apos;JavaScript&apos;, &apos;Vue&apos;, &apos;React&apos;]</div><div class="line">localStorage.language = JSON.stringify(language)</div><div class="line">sessionStorag.language = JSON.stringify(language)</div><div class="line">//取</div><div class="line">let storageLanguage = JSON.parse(localStorage.language)</div></pre></td></tr></table></figure>
+<h3 id="2-localStorage存取对象"><a href="#2-localStorage存取对象" class="headerlink" title="2.localStorage存取对象"></a>2.localStorage存取对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">let myInfo = &#123;</div><div class="line">	&apos;name&apos;: &apos;hzzly&apos;,</div><div class="line">	&apos;age&apos;: 21,</div><div class="line">	&apos;school&apos;: &apos;ECUT&apos;,</div><div class="line">	&apos;city&apos;: &apos;NanChang&apos;</div><div class="line">&#125;</div><div class="line">localStorage.myInfo = JSON.stringify(myInfo)</div><div class="line">sessionStorag.myInfo = JSON.stringify(myInfo)</div><div class="line">//取</div><div class="line">let storageLanguage = JSON.parse(localStorage.myInfo)</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/06/sessionStorage与localStorage/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Express与MongoDB的缠绵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/03/Express与MongoDB的缠绵/">Express与MongoDB的缠绵</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/03/Express与MongoDB的缠绵/" class="archive-article-date">
+  	<time datetime="2017-02-03T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a><strong>前奏</strong></h3><p>Express 是什么？</p>
+<blockquote>
+<p>Express 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架，它提供一系列强大的特性，帮助你创建各种 Web 和移动设备应用。</p>
+</blockquote>
+<p>全局安装express<a href="http://www.expressjs.com.cn/starter/generator.html" target="_blank" rel="external">脚手架</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install express-generator -g</div></pre></td></tr></table></figure>
+<p>创建express项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ express myapp</div><div class="line">$ cd myapp</div><div class="line">$ npm install</div><div class="line">$ DEBUG=myapp npm start</div></pre></td></tr></table></figure>
+<p>MongoDB与Mongoose？</p>
+<blockquote>
+<ul>
+<li>MongoDB是一个对象数据库，是用来存储数据的；存储的数据格式为JSON。</li>
+<li>Mongoose是封装了MongoDB操作(增删改查等)的一个对象模型库,是用来操作这些数据的。</li>
+</ul>
+</blockquote>
+<p>安装MongoDB：<br><a href="https://www.mongodb.com/download-center?jmp=nav" target="_blank" rel="external">https://www.mongodb.com/download-center?jmp=nav</a></p>
+<p>安装Mongoose：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install mongoose --save</div></pre></td></tr></table></figure>
+<h3 id="一、连接MongoDB"><a href="#一、连接MongoDB" class="headerlink" title="一、连接MongoDB"></a><strong>一、连接MongoDB</strong></h3><blockquote>
+<p>在项目根目录下新建/lib/mongo.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var mongoose = require(&quot;mongoose&quot;);</div><div class="line">var db = mongoose.connect(&apos;mongodb://localhost:27017/myblog&apos;);</div><div class="line">module.exports = db</div></pre></td></tr></table></figure>
+<blockquote>
+<p>要连接的数据库为myblog</p>
+</blockquote>
+<h3 id="二、Schema"><a href="#二、Schema" class="headerlink" title="二、Schema"></a><strong>二、Schema</strong></h3><blockquote>
+<p>一种以文件形式存储的数据库模型骨架，无法直接通往数据库端，不具备对数据库的操作能力，仅仅只是数据库模型在程序片段中的一种表现，可以说是数据属性模型(传统意义的表结构)，又或着是“集合”的模型骨架</p>
+</blockquote>
+<p><strong>新建一个用户Schema</strong></p>
+<blockquote>
+<p>在项目根目录下新建/models/users.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var mongoose = require(&quot;mongoose&quot;);</div><div class="line">var db = require(&apos;../lib/mongo&apos;);</div><div class="line">//一个用户模型</div><div class="line">var UserSchema = new mongoose.Schema(&#123;</div><div class="line">	username    : &#123; type:String &#125;,</div><div class="line">	password    : &#123;type: String&#125;,</div><div class="line">	avatar      : &#123;type: String&#125;,</div><div class="line">	age         : &#123; type:Number, default:0 &#125;,</div><div class="line">	description : &#123; type: String&#125;,</div><div class="line">	email       : &#123; type: String &#125;,</div><div class="line">	github      : &#123; type: String &#125;,</div><div class="line">	time        : &#123; type:Date, default:Date.now &#125;</div><div class="line">&#125;);</div><div class="line">//创建Model</div><div class="line">var UserModel = db.model(&quot;user&quot;, UserSchema );</div><div class="line">module.exports = UserModel</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>user：数据库中的集合名称,当我们对其添加数据时如果user已经存在，则会保存到其目录下，如果不存在，则会创建user集合，然后在保存数据。</li>
+<li>拥有了Model，我们也就拥有了操作数据库的金钥匙，就可以使用Model来进行增删改查的具体操作。</li>
+</ul>
+</blockquote>
+<p><strong>Entity</strong></p>
+<blockquote>
+<p>Entity–由Model创建的实体，使用save方法保存数据，Model和Entity都有能影响数据库的操作，但Model比Entity更具操作性。所以此项目主要用的Model。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var UserEntity = new UserModel(&#123;</div><div class="line">	name : &quot;hzzly&quot;,</div><div class="line">	age  : 21,</div><div class="line">	email: &quot;hjingren@aliyun.com&quot;,</div><div class="line">	github: &apos;https://github.com/hzzly&apos;</div><div class="line">&#125;);</div><div class="line">UserEntity.save(function(error,doc)&#123;</div><div class="line">	if(error)&#123;</div><div class="line">		console.log(&quot;error :&quot; + error);</div><div class="line">	&#125;else&#123;</div><div class="line">		console.log(doc);</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="三、封装数据库的CURD"><a href="#三、封装数据库的CURD" class="headerlink" title="三、封装数据库的CURD"></a><strong>三、封装数据库的CURD</strong></h3><blockquote>
+<ul>
+<li>在lib文件下新建api.js</li>
+<li>采用Promise封装对数据库的操作，避免回调地狱，使得代码能够更好的被读懂和维护。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">var UserModel = require(&apos;../models/users&apos;);</div><div class="line">module.exports = &#123;</div><div class="line">	/**</div><div class="line">	 * 添加数据</div><div class="line">	 * @param  &#123;[type]&#125; data 需要保存的数据对象</div><div class="line">	 */</div><div class="line">	save(data) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.create(保存的对象,callback)</div><div class="line">			UserModel.create(data, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	find(data=&#123;&#125;, fields=null, options=&#123;&#125;) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.find(需要查找的对象(如果为空，则查找到所有数据), 属性过滤对象[可选参数], options[可选参数], callback)</div><div class="line">			UserModel.find(data, fields, options, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	findOne(data) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.findOne(需要查找的对象,callback)</div><div class="line">			UserModel.findOne(data, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	findById(data) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.findById(需要查找的id对象 ,callback)</div><div class="line">			UserModel.findById(data, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	update(conditions, update) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.update(查询条件,更新对象,callback)</div><div class="line">			UserModel.update(conditions, update, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	remove(conditions) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.update(查询条件,callback)</div><div class="line">			UserModel.remove(conditions, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="四、使用"><a href="#四、使用" class="headerlink" title="四、使用"></a><strong>四、使用</strong></h3><blockquote>
+<p>在/routers/index.js中使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">var api = require(&apos;../lib/api&apos;);</div><div class="line">router.post(&apos;/login&apos;, function(req, res, next) &#123;</div><div class="line">	var user = &#123;</div><div class="line">		username : req.body.username,</div><div class="line">		password: req.body.password</div><div class="line">	&#125;;</div><div class="line">	api.findOne(user)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)</div><div class="line">		&#125;)</div><div class="line">&#125;)</div><div class="line">router.post(&apos;/sign_up&apos;, function(req, res, next) &#123;</div><div class="line">	var user = &#123;</div><div class="line">		username : req.body.username,</div><div class="line">		password: req.body.password,</div><div class="line">		email: req.body.email</div><div class="line">	&#125;;</div><div class="line">	api.save(user)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">&#125;)</div><div class="line">router.get(&apos;/user_list&apos;, function(req, res, next) &#123;</div><div class="line">	//返回所有用户</div><div class="line">	api.find(&#123;&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//返回只包含一个键值name、age的所有记录</div><div class="line">	api.find(&#123;&#125;,&#123;name:1, age:1, _id:0&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//返回所有age大于18的数据</div><div class="line">	api.find(&#123;&quot;age&quot;:&#123;&quot;$gt&quot;:18&#125;&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//返回20条数据</div><div class="line">	api.find(&#123;&#125;,null,&#123;limit:20&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//查询所有数据，并按照age降序顺序返回数据</div><div class="line">	api.find(&#123;&#125;,null,&#123;sort:&#123;age:-1&#125;&#125;) //1是升序，-1是降序</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/03/Express与MongoDB的缠绵/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -684,27 +1071,27 @@
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+              <a href="http://www.alloyteam.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>腾讯AlloyTeam</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+              <a href="http://fex.baidu.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>百度FEX</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+              <a href="http://taobaofed.org/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>淘宝FED</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+              <a href="https://75team.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>奇舞团</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+              <a href="http://www.w3cplus.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>w3cplus</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+              <a href="http://www.daqianduan.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>大前端</a>
             </li>
           
         </ul>
