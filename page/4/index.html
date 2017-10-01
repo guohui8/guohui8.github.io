@@ -174,6 +174,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Javascript基础总结六(数据类型和Json）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/18/Javascript基础总结六(数据类型和Json）/">Javascript基础总结六(数据类型和Json）</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/18/Javascript基础总结六(数据类型和Json）/" class="archive-article-date">
+  	<time datetime="2016-03-18T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是JSON"><a href="#什么是JSON" class="headerlink" title="什么是JSON"></a>什么是JSON</h2><p><code>JSON</code>：JavaScript 对象表示法（<code>J</code>ava<code>S</code>cript <code>O</code>bject <code>N</code>otation）。</p>
+<p><code>JSON</code>的形式是用大括号<code>“{}”</code>包围起来的项目列表，每一个项目间用逗号（,）分隔，而项目就是用冒号（:）分隔的属性名和属性值。这是典型的字典表示形式，也再次表明<code>javascript</code>里的对象就是字典结构。不管多么复杂的对象，都可以用一句<code>JSON</code>代码来创建并赋值。在<code>JSON</code>中，名称/值对 包括字段名称（在双引号中），后面写一个冒号，然后是值</p>
+<h2 id="JSON-结构"><a href="#JSON-结构" class="headerlink" title="JSON 结构"></a>JSON 结构</h2><p>JSON有两种结构</p>
+<p><code>json</code>简单说就是<code>javascript</code>中的对象和数组，所以这两种结构就是对象和数组两种结构，通过这两种结构可以表示各种复杂的结构</p>
+<p><strong>1、对象</strong>：对象在js中表示为<code>“{}”</code>括起来的内容，数据结构为 <code>{key：value,key：value,...}</code>的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象<code>.key</code> 获取属性值，这个属性值的类型可以是 数字、字符串、数组、对象几种。</p>
+<p><strong>2、数组：</strong>数组在js中是中括号<code>“[]”</code>括起来的内容，数据结构为 <code>[&quot;java&quot;,&quot;javascript&quot;,&quot;vb&quot;,...]</code>，取值方式和所有语言中一样，使用索引获取，字段值的类型可以是 数字、字符串、数组、对象几种。<br>经过对象、数组2种结构就可以组合成复杂的数据结构了。</p>
+<h2 id="JSON-语法规则"><a href="#JSON-语法规则" class="headerlink" title="JSON 语法规则"></a><strong>JSON 语法规则</strong></h2><p><code>JSON</code> 语法是 <code>JavaScript</code> 对象表示法语法的子集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">数据在名称/值对中</div><div class="line">数据由逗号分隔</div><div class="line">花括号保存对象</div><div class="line">方括号保存数组</div></pre></td></tr></table></figure>
+<p><code>JSON</code> 值可以是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">数字（整数或浮点数）</div><div class="line">字符串（在双引号中）</div><div class="line">逻辑值（true 或 false）</div><div class="line">数组（在方括号中）</div><div class="line">对象（在花括号中）</div><div class="line">null</div></pre></td></tr></table></figure>
+<p>除以上6种外，再无其他，没有像js一样的undefined、NAN</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1） 并列的数据之间用逗号（&quot;, &quot;）分隔。</div><div class="line"></div><div class="line">2） 映射用冒号（&quot;: &quot;）表示。</div><div class="line"></div><div class="line">3） 并列数据的集合（数组）用方括号(&quot;[]&quot;)表示。</div><div class="line"></div><div class="line">4） 映射的集合（对象）用大括号（&quot;&#123;&#125;&quot;）表示。</div></pre></td></tr></table></figure>
+<p>对象是一套无序的名/值对，一个对象以左边分支开始，以右边分支结束<br><img src="http://segmentfault.com/img/bVcXW0" alt="img"></p>
+<p>一个值可以是用双引号括起来的字符串，或者是一个数值，一个<code>true or false</code> ，一个数组或者一个对象<br><img src="http://segmentfault.com/img/bVcXW5" alt="img"></p>
+<h2 id="JSON与对象字面量"><a href="#JSON与对象字面量" class="headerlink" title="JSON与对象字面量"></a>JSON与对象字面量</h2><p>在编程语言中,字面量是一种表示值的记法。<br><code>JSON</code>规定键-值对中的<code>键</code>必须用双引号！ 引号。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;first name&quot; : &quot;Mike&quot;&#125;;</div></pre></td></tr></table></figure>
+<p>在<code>JSON</code>字符串中，不能使用函数或者正则表达式字面量</p>
+<h2 id="数据类型："><a href="#数据类型：" class="headerlink" title="数据类型："></a><strong>数据类型：</strong></h2><p>从结构上看，所有的数据（data）最终都可以分解成三种类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">第一种类型是标量（scalar），也就是一个单独的字符串（string）或数字（numbers），比如&quot;北京&quot;这个单独的词。</div><div class="line"></div><div class="line">第二种类型是序列（sequence），也就是若干个相关的数据按照一定顺序并列在一起，又叫做数组（array）或列表（List），比如&quot;北京，上海&quot;。</div><div class="line"></div><div class="line">第三种类型是映射（mapping），也就是一个名/值对（Name/value），即数据有一个名称，还有一个与之相对应的值，这又称作散列（hash）或字典（dictionary），比如&quot;首都：北京&quot;。</div></pre></td></tr></table></figure>
+<p>在编程语言中，只要有了数组（array）和对象（object）就能够储存一切数据了。</p>
+<p>数组和对象的另一个区别是，数组的数据没有”名称”（name），对象的数据有”名称”（name）。</p>
+<p><code>JavaScript</code>中有5种简单数据类型（也称为基本数据类型）：<code>Undefined</code>、<code>Null</code>、<code>Boolean</code>、<code>Number</code>和<code>String</code>。还有1种复杂数据类型——<code>Object</code>，<code>Object</code>本质上是由一组无序的名值对组成的。</p>
+<p>对一个值使用<code>typeof</code>操作符可能返回下列某个字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&quot;undefined&quot;——如果这个值未定义；</div><div class="line"></div><div class="line">&quot;boolean&quot;——如果这个值是布尔值；</div><div class="line"></div><div class="line">&quot;string&quot;——如果这个值是字符串；</div><div class="line"></div><div class="line">&quot;number&quot;——如果这个值是数值；</div><div class="line"></div><div class="line">&quot;object&quot;——如果这个值是对象或null；</div><div class="line"></div><div class="line">&quot;function&quot;——如果这个值是函数；</div></pre></td></tr></table></figure>
+<h3 id="Undefined类型："><a href="#Undefined类型：" class="headerlink" title="Undefined类型："></a>Undefined类型：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    `Undefined`类型只有一个值，在使用var声明变量但未对其加以初始化时，</div><div class="line">这个变量的值就是undefined</div></pre></td></tr></table></figure>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h3><p>　　Null类型是第二个只有一个值的数据类型，这个特殊的值是null。从逻辑角度来看，null值表示一个空对象指针，而这也正是使用typeof操作符检测null时会返回”object”的原因，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var car = null;</div><div class="line">alert(typeof car); // &quot;object&quot;</div></pre></td></tr></table></figure>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a>Number类型</h3><p>　　这种类型用来表示整数和浮点数值，还有一种特殊的数值，即NaN（非数值 Not a Number）。这个数值用于表示一个本来要返回数值的操作数未返回数值的情况（这样就不会抛出错误了）。</p>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h3><p>　　<code>String</code>类型用于表示由零或多个16位<code>Unicode</code>字符组成的字符序列，即字符串。字符串可以由单引号(‘)或双引号(“)表示。</p>
+<p>数值、布尔值、对象和字符串值都有<code>toString()</code>方法。但<code>null</code>和<code>undefined</code>值没有这个方法。</p>
+<p>　　多数情况下，调用<code>toString()</code>方法不必传递参数。但是，在调用数值的<code>toString()</code>方法时，可以传递一个参数：输出数值的基数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var num = 10;</div><div class="line">alert(num.toString());      //&quot;10&quot;</div><div class="line">alert(num.toString(2));     //&quot;1010&quot;</div><div class="line">alert(num.toString(8));     //&quot;12&quot;</div><div class="line">alert(num.toString(10));    //&quot;10&quot;</div><div class="line">alert(num.toString(16));    //&quot;a&quot;</div></pre></td></tr></table></figure>
+<p>在不知道要转换的值是不是<code>null</code>或<code>undefined</code>的情况下，还可以使用转型函数<code>String()</code>，这个函数能够将任何类型的值转换为字符串。<code>String()</code>函数遵循下列转换规则：</p>
+<p>　　● 如果值有<code>toString()</code>方法，则调用该方法（没有参数）并返回相应的结果</p>
+<p>　　● 如果值是<code>null</code>，则返回”<code>null</code>“</p>
+<p>　　● 如果值是<code>undefined</code>，则返回”<code>undefined</code>“</p>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h3><p>　　对象其实就是一组数据和功能的集合。对象可以通过执行<code>new</code>操作符后跟要创建的对象类型的名称来创建。而创建<code>Object</code>类型的实例并为其添加属性和（或）方法，就可以创建自定义对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var o = new Object();</div></pre></td></tr></table></figure>
+<h2 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var s = &quot;Nicholas&quot;;</div><div class="line">    var b =true;</div><div class="line">    var c = 21;</div><div class="line">    var u;</div><div class="line">    var n = null;</div><div class="line">    var o = &#123;&#125;;</div><div class="line">    var obj = new Object;//最好写出new object()形式</div><div class="line"></div><div class="line">    alert(typeof s);//string</div><div class="line">    alert(typeof b);//boolean</div><div class="line">    alert(typeof c);//number</div><div class="line">    alert(typeof u);//undefined</div><div class="line">    alert(typeof n);//object</div><div class="line">    alert(typeof o);//object</div><div class="line">    alert(typeof obj);//object</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/18/Javascript基础总结六(数据类型和Json）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Javascript基础总结五（原型和原型链）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1162,11 +1261,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">相册</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">相册</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

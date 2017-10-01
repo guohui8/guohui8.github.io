@@ -174,6 +174,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Express与MongoDB的缠绵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/03/Express与MongoDB的缠绵/">Express与MongoDB的缠绵</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/03/Express与MongoDB的缠绵/" class="archive-article-date">
+  	<time datetime="2017-02-03T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a><strong>前奏</strong></h3><p>Express 是什么？</p>
+<blockquote>
+<p>Express 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架，它提供一系列强大的特性，帮助你创建各种 Web 和移动设备应用。</p>
+</blockquote>
+<p>全局安装express<a href="http://www.expressjs.com.cn/starter/generator.html" target="_blank" rel="external">脚手架</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install express-generator -g</div></pre></td></tr></table></figure>
+<p>创建express项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ express myapp</div><div class="line">$ cd myapp</div><div class="line">$ npm install</div><div class="line">$ DEBUG=myapp npm start</div></pre></td></tr></table></figure>
+<p>MongoDB与Mongoose？</p>
+<blockquote>
+<ul>
+<li>MongoDB是一个对象数据库，是用来存储数据的；存储的数据格式为JSON。</li>
+<li>Mongoose是封装了MongoDB操作(增删改查等)的一个对象模型库,是用来操作这些数据的。</li>
+</ul>
+</blockquote>
+<p>安装MongoDB：<br><a href="https://www.mongodb.com/download-center?jmp=nav" target="_blank" rel="external">https://www.mongodb.com/download-center?jmp=nav</a></p>
+<p>安装Mongoose：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install mongoose --save</div></pre></td></tr></table></figure>
+<h3 id="一、连接MongoDB"><a href="#一、连接MongoDB" class="headerlink" title="一、连接MongoDB"></a><strong>一、连接MongoDB</strong></h3><blockquote>
+<p>在项目根目录下新建/lib/mongo.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var mongoose = require(&quot;mongoose&quot;);</div><div class="line">var db = mongoose.connect(&apos;mongodb://localhost:27017/myblog&apos;);</div><div class="line">module.exports = db</div></pre></td></tr></table></figure>
+<blockquote>
+<p>要连接的数据库为myblog</p>
+</blockquote>
+<h3 id="二、Schema"><a href="#二、Schema" class="headerlink" title="二、Schema"></a><strong>二、Schema</strong></h3><blockquote>
+<p>一种以文件形式存储的数据库模型骨架，无法直接通往数据库端，不具备对数据库的操作能力，仅仅只是数据库模型在程序片段中的一种表现，可以说是数据属性模型(传统意义的表结构)，又或着是“集合”的模型骨架</p>
+</blockquote>
+<p><strong>新建一个用户Schema</strong></p>
+<blockquote>
+<p>在项目根目录下新建/models/users.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var mongoose = require(&quot;mongoose&quot;);</div><div class="line">var db = require(&apos;../lib/mongo&apos;);</div><div class="line">//一个用户模型</div><div class="line">var UserSchema = new mongoose.Schema(&#123;</div><div class="line">	username    : &#123; type:String &#125;,</div><div class="line">	password    : &#123;type: String&#125;,</div><div class="line">	avatar      : &#123;type: String&#125;,</div><div class="line">	age         : &#123; type:Number, default:0 &#125;,</div><div class="line">	description : &#123; type: String&#125;,</div><div class="line">	email       : &#123; type: String &#125;,</div><div class="line">	github      : &#123; type: String &#125;,</div><div class="line">	time        : &#123; type:Date, default:Date.now &#125;</div><div class="line">&#125;);</div><div class="line">//创建Model</div><div class="line">var UserModel = db.model(&quot;user&quot;, UserSchema );</div><div class="line">module.exports = UserModel</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>user：数据库中的集合名称,当我们对其添加数据时如果user已经存在，则会保存到其目录下，如果不存在，则会创建user集合，然后在保存数据。</li>
+<li>拥有了Model，我们也就拥有了操作数据库的金钥匙，就可以使用Model来进行增删改查的具体操作。</li>
+</ul>
+</blockquote>
+<p><strong>Entity</strong></p>
+<blockquote>
+<p>Entity–由Model创建的实体，使用save方法保存数据，Model和Entity都有能影响数据库的操作，但Model比Entity更具操作性。所以此项目主要用的Model。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var UserEntity = new UserModel(&#123;</div><div class="line">	name : &quot;hzzly&quot;,</div><div class="line">	age  : 21,</div><div class="line">	email: &quot;hjingren@aliyun.com&quot;,</div><div class="line">	github: &apos;https://github.com/hzzly&apos;</div><div class="line">&#125;);</div><div class="line">UserEntity.save(function(error,doc)&#123;</div><div class="line">	if(error)&#123;</div><div class="line">		console.log(&quot;error :&quot; + error);</div><div class="line">	&#125;else&#123;</div><div class="line">		console.log(doc);</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="三、封装数据库的CURD"><a href="#三、封装数据库的CURD" class="headerlink" title="三、封装数据库的CURD"></a><strong>三、封装数据库的CURD</strong></h3><blockquote>
+<ul>
+<li>在lib文件下新建api.js</li>
+<li>采用Promise封装对数据库的操作，避免回调地狱，使得代码能够更好的被读懂和维护。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">var UserModel = require(&apos;../models/users&apos;);</div><div class="line">module.exports = &#123;</div><div class="line">	/**</div><div class="line">	 * 添加数据</div><div class="line">	 * @param  &#123;[type]&#125; data 需要保存的数据对象</div><div class="line">	 */</div><div class="line">	save(data) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.create(保存的对象,callback)</div><div class="line">			UserModel.create(data, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	find(data=&#123;&#125;, fields=null, options=&#123;&#125;) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.find(需要查找的对象(如果为空，则查找到所有数据), 属性过滤对象[可选参数], options[可选参数], callback)</div><div class="line">			UserModel.find(data, fields, options, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	findOne(data) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.findOne(需要查找的对象,callback)</div><div class="line">			UserModel.findOne(data, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	findById(data) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.findById(需要查找的id对象 ,callback)</div><div class="line">			UserModel.findById(data, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	update(conditions, update) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.update(查询条件,更新对象,callback)</div><div class="line">			UserModel.update(conditions, update, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;,</div><div class="line">	remove(conditions) &#123;</div><div class="line">		return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">			//model.update(查询条件,callback)</div><div class="line">			UserModel.remove(conditions, (error, doc) =&gt; &#123;</div><div class="line">				if(error)&#123;</div><div class="line">					reject(error)</div><div class="line">				&#125;else&#123;</div><div class="line">					resolve(doc)</div><div class="line">				&#125;</div><div class="line">			&#125;)</div><div class="line">		&#125;)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="四、使用"><a href="#四、使用" class="headerlink" title="四、使用"></a><strong>四、使用</strong></h3><blockquote>
+<p>在/routers/index.js中使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">var api = require(&apos;../lib/api&apos;);</div><div class="line">router.post(&apos;/login&apos;, function(req, res, next) &#123;</div><div class="line">	var user = &#123;</div><div class="line">		username : req.body.username,</div><div class="line">		password: req.body.password</div><div class="line">	&#125;;</div><div class="line">	api.findOne(user)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)</div><div class="line">		&#125;)</div><div class="line">&#125;)</div><div class="line">router.post(&apos;/sign_up&apos;, function(req, res, next) &#123;</div><div class="line">	var user = &#123;</div><div class="line">		username : req.body.username,</div><div class="line">		password: req.body.password,</div><div class="line">		email: req.body.email</div><div class="line">	&#125;;</div><div class="line">	api.save(user)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">&#125;)</div><div class="line">router.get(&apos;/user_list&apos;, function(req, res, next) &#123;</div><div class="line">	//返回所有用户</div><div class="line">	api.find(&#123;&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//返回只包含一个键值name、age的所有记录</div><div class="line">	api.find(&#123;&#125;,&#123;name:1, age:1, _id:0&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//返回所有age大于18的数据</div><div class="line">	api.find(&#123;&quot;age&quot;:&#123;&quot;$gt&quot;:18&#125;&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//返回20条数据</div><div class="line">	api.find(&#123;&#125;,null,&#123;limit:20&#125;)</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">	//查询所有数据，并按照age降序顺序返回数据</div><div class="line">	api.find(&#123;&#125;,null,&#123;sort:&#123;age:-1&#125;&#125;) //1是升序，-1是降序</div><div class="line">		.then(result =&gt; &#123;</div><div class="line">			console.log(result)			</div><div class="line">		&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/03/Express与MongoDB的缠绵/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-JavaScript操作DOM的那些坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1442,161 +1557,6 @@
 
 
   
-    <article id="post-Ajax封装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/Ajax封装/">Ajax封装</a>
-    </h1>
-  
-
-        
-        <a href="/2016/07/20/Ajax封装/" class="archive-article-date">
-  	<time datetime="2016-07-20T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>之前的项目中，因为用到了前后端分离的思路，所以都要通过Ajax来请求数据然后把数据渲染到页面上，一开始想过直接引用Jquery，但感觉就使用Jquery的Ajax函数，有点太浪费，所以就自己撸了一个Ajax函数。本文由浅入深，一步一步带你封装属于自己的Ajax库。</p>
-</blockquote>
-<h2 id="Ajax简介"><a href="#Ajax简介" class="headerlink" title="Ajax简介"></a>Ajax简介</h2><blockquote>
-<ul>
-<li>Asynchronous Javascript And XML （异步的JavaScript和XML）</li>
-<li>它并不是一种单一的技术，而是有机利用一系列交互式网页应用相关的技术所形成的结合体</li>
-<li>Ajax是一种用于创建快速动态网页的技术。在前台与后台进行数据交换，Ajax可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，实现局部更新。</li>
-</ul>
-</blockquote>
-<h3 id="1、优点"><a href="#1、优点" class="headerlink" title="1、优点"></a>1、优点</h3><blockquote>
-<ul>
-<li>页面无刷新，用户体验好。</li>
-<li>异步通信，更加快的响应能力。</li>
-<li>减少冗余请求，减轻了服务器负担。</li>
-<li>基于标准化的并被广泛支持的技术</li>
-</ul>
-</blockquote>
-<h3 id="2、应用场景"><a href="#2、应用场景" class="headerlink" title="2、应用场景"></a>2、应用场景</h3><blockquote>
-<ul>
-<li>场景 1. 数据验证</li>
-<li>场景 2. 按需取数据</li>
-<li>场景 3. 自动更新页面</li>
-<li>…</li>
-</ul>
-</blockquote>
-<p>说了这么多，接下来来点干货。</p>
-<h2 id="创建ajax的步骤"><a href="#创建ajax的步骤" class="headerlink" title="创建ajax的步骤"></a>创建ajax的步骤</h2><blockquote>
-<p>Ajax的原理简单来说通过<code>XMLHttpRequest</code>对象来向服务器发异步请求，从服务器获得数据，然后用javascript来操作DOM而更新页面。这其中最关键的一步就是从服务器获得请求数据。原生创建ajax可分为以下四步</p>
-</blockquote>
-<h3 id="1、创建XMLHttpRequest对象"><a href="#1、创建XMLHttpRequest对象" class="headerlink" title="1、创建XMLHttpRequest对象"></a>1、创建XMLHttpRequest对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function createRequest ()&#123;</div><div class="line">    if (window.XMLHttpRequest) &#123;</div><div class="line">        //IE6以上</div><div class="line">        xhr = new XMLHttpRequest();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">    &#125;</div><div class="line">    return xhr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="2、准备请求"><a href="#2、准备请求" class="headerlink" title="2、准备请求"></a>2、准备请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(method,url,async);</div></pre></td></tr></table></figure>
-<ul>
-<li><p>第一个参数表示请求类型的字符串，其值可以是<code>GET</code>或者<code>POST</code><br><code>GET</code>请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;GET&quot;,demo.php?name=hzzly&amp;age=21,true);</div></pre></td></tr></table></figure>
-<p><code>POST</code>请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;POST&quot;,demo.php,true);</div></pre></td></tr></table></figure>
-</li>
-<li><p>第二个参数是要作为请求发送目标的URL。</p>
-</li>
-<li><p>第三个参数是true或false，表示请求是以异步还是同步的模式发出。（默认为true，一般不建议为false）</p>
-</li>
-</ul>
-<h3 id="3、发送请求"><a href="#3、发送请求" class="headerlink" title="3、发送请求"></a>3、发送请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.send();</div></pre></td></tr></table></figure>
-<ul>
-<li><p><code>GET</code>请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;GET&quot;,demo.php?name=hzzly&amp;age=21,true);</div><div class="line">xhr.send();</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>POST</code>请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;POST&quot;,demo.php,true);</div><div class="line">xhr.setRequestHeder(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded;charset=UTF-8&quot;);</div><div class="line">xhr.send(param)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="4、处理响应"><a href="#4、处理响应" class="headerlink" title="4、处理响应"></a>4、处理响应</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = function()&#123;</div><div class="line">    if(xhr.readyState == 4 &amp;&amp; xhr.status == 200)&#123;</div><div class="line">        console.log(xhr.responseText);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><p><code>onreadystatechange</code>：当处理过程发生变化的时候执行下面的函数</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;   readyState</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>  ：ajax处理过程</p>
-<ul>
-<li>0：请求未初始化（还没有调用 <code>open()</code>）</li>
-<li>1：请求已经建立，但是还没有发送（还没有调用 <code>send()</code>）</li>
-<li>2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）</li>
-<li>3：请求在处理中；通常响应中已有部分数据可用了，但是服务器还没有完成响应的生成</li>
-<li>4：响应已完成；您可以获取并使用服务器的响应了</li>
-</ul>
-<ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;   status</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>  属性:</p>
-<ul>
-<li>200: “OK”</li>
-<li>404: 未找到页面</li>
-</ul>
-<ul>
-<li><code>responseText</code>：获得字符串形式的响应数据，可以用<code>JSON.parse(xhr.responseText)</code>转化为<code>JSON</code>对象</li>
-</ul>
-</blockquote>
-<h2 id="封装例子"><a href="#封装例子" class="headerlink" title="封装例子"></a>封装例子</h2><blockquote>
-<p>1.get请求函数</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 一个简单的get请求</div><div class="line"> * @param &#123;String&#125;   url     请求地址,文件名</div><div class="line"> * @param &#123;Function&#125; fnSucc  请求成功时执行的函数</div><div class="line"> * @param &#123;Function&#125; fnFaild 请求失败执行的函数</div><div class="line"> */</div><div class="line">function Get(url, fnSucc, fnFaild) &#123;</div><div class="line">    //1.创建ajax对象</div><div class="line">    var xhr = null;</div><div class="line">        /**</div><div class="line">         * 此处必须需要使用window.的方式,表示为window对象的一个属性.不存在时值为undefined.</div><div class="line">         * 进入else若直接使用XMLHttpRequest在不支持的情况下会报错</div><div class="line">         **/</div><div class="line">    if (window.XMLHttpRequest) &#123;</div><div class="line">        //IE6以上</div><div class="line">        xhr = new XMLHttpRequest();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">    &#125;</div><div class="line">    //2.连接服务器</div><div class="line">    //open(方法,url,是否异步)</div><div class="line">    xhr.open(&quot;GET&quot;, url, true);</div><div class="line">    //3.发送请求</div><div class="line">    xhr.send();</div><div class="line">    //4.接收返回</div><div class="line">    //OnRedayStateChange事件</div><div class="line">    xhr.onreadystatechange = function () &#123;</div><div class="line">        if (xhr.readyState === 4) &#123;</div><div class="line">            if (xhr.status === 200) &#123;</div><div class="line">                //alert(&quot;成功&quot; + xhr.responseText);</div><div class="line">                fnSucc(xhr.responseText);</div><div class="line">            &#125; else &#123;</div><div class="line">                //alert(&quot;服务器响应失败!&quot;);</div><div class="line">                if (fnFaild) &#123;</div><div class="line">                    fnFaild();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>2.get与post结合的请求函数</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * AJAX函数封装</div><div class="line"> * @param &#123;string&#125; url     请求地址（必须）</div><div class="line"> * @param &#123;object&#125; options 发送请求的选项参数</div><div class="line"> *   @config &#123;string&#125; [options.type] 请求发送的类型。默认为GET。</div><div class="line"> *   @config &#123;Object&#125; [options.data] 需要发送的数据。</div><div class="line"> *   @config &#123;Function&#125; [options.onsuccess] 请求成功时触发。（必须）</div><div class="line"> *   @config &#123;Function&#125; [options.onfail] 请求失败时触发。</div><div class="line"> */</div><div class="line">function AJAX(url, options) &#123;</div><div class="line">    //1.创建ajax对象</div><div class="line">    var xhr = null;</div><div class="line">        /**</div><div class="line">         * 此处必须需要使用window.的方式,表示为window对象的一个属性.不存在时值为undefined,进入else</div><div class="line">         * 若直接使用XMLHttpRequest,在不支持的情况下会报错</div><div class="line">         **/</div><div class="line">    if (window.XMLHttpRequest) &#123;</div><div class="line">        //IE6以上</div><div class="line">        xhr = new XMLHttpRequest();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">    &#125;</div><div class="line">    //2.连接服务器</div><div class="line">    //open(方法,url,是否异步)</div><div class="line">    var param = &quot;&quot;; //请求参数。</div><div class="line">    //只有data存在，且为对象使才执行</div><div class="line">    var data = options.data ? options.data : -1; //缓存data</div><div class="line">    if (typeof (data) === &quot;object&quot;) &#123;</div><div class="line">        for (var key in data) &#123; //请求参数拼接</div><div class="line">            if (data.hasOwnProperty(key)) &#123;</div><div class="line">                param += `$&#123;key&#125;=$&#123;data[key]&#125;&amp;`;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        param.replace(/&amp;$/, &quot;&quot;);</div><div class="line">    &#125; else &#123;</div><div class="line">        param = &quot;timestamp=&quot; + new Date().getTime();</div><div class="line">    &#125;</div><div class="line">    //3.发送请求</div><div class="line">    var type = options.type ? options.type.toUpperCase() : &quot;GET&quot;;</div><div class="line">    if (type === &quot;GET&quot;) &#123;</div><div class="line">        xhr.open(&quot;GET&quot;, `$&#123;url&#125;?$&#123;param&#125;`, true);</div><div class="line">        xhr.send();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr.open(&quot;POST&quot;, url, true);</div><div class="line">        xhr.setRequestHeder(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded;charset=UTF-8&quot;);</div><div class="line">        xhr.send(param);</div><div class="line">    &#125;</div><div class="line">    //4.接收返回</div><div class="line">    //OnRedayStateChange事件</div><div class="line">    xhr.onreadystatechange = function () &#123;</div><div class="line">        if (xhr.readyState === 4) &#123;</div><div class="line">            if (xhr.status === 200) &#123;</div><div class="line">                //请求成功。形参为获取到的字符串形式的响应数据</div><div class="line">                options.onsuccess(xhr.responseText);</div><div class="line">            &#125; else &#123;</div><div class="line">                //先判断是否存在请求失败函数</div><div class="line">                //存在时，形参为XMLHttpRequest对象，便于进行错误进行处理</div><div class="line">                if (options.onfail) &#123;</div><div class="line">                    options.onfail(xhr);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/07/20/Ajax封装/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1694,11 +1654,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">相册</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">相册</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

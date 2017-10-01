@@ -174,6 +174,161 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Ajax封装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/20/Ajax封装/">Ajax封装</a>
+    </h1>
+  
+
+        
+        <a href="/2016/07/20/Ajax封装/" class="archive-article-date">
+  	<time datetime="2016-07-20T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>之前的项目中，因为用到了前后端分离的思路，所以都要通过Ajax来请求数据然后把数据渲染到页面上，一开始想过直接引用Jquery，但感觉就使用Jquery的Ajax函数，有点太浪费，所以就自己撸了一个Ajax函数。本文由浅入深，一步一步带你封装属于自己的Ajax库。</p>
+</blockquote>
+<h2 id="Ajax简介"><a href="#Ajax简介" class="headerlink" title="Ajax简介"></a>Ajax简介</h2><blockquote>
+<ul>
+<li>Asynchronous Javascript And XML （异步的JavaScript和XML）</li>
+<li>它并不是一种单一的技术，而是有机利用一系列交互式网页应用相关的技术所形成的结合体</li>
+<li>Ajax是一种用于创建快速动态网页的技术。在前台与后台进行数据交换，Ajax可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，实现局部更新。</li>
+</ul>
+</blockquote>
+<h3 id="1、优点"><a href="#1、优点" class="headerlink" title="1、优点"></a>1、优点</h3><blockquote>
+<ul>
+<li>页面无刷新，用户体验好。</li>
+<li>异步通信，更加快的响应能力。</li>
+<li>减少冗余请求，减轻了服务器负担。</li>
+<li>基于标准化的并被广泛支持的技术</li>
+</ul>
+</blockquote>
+<h3 id="2、应用场景"><a href="#2、应用场景" class="headerlink" title="2、应用场景"></a>2、应用场景</h3><blockquote>
+<ul>
+<li>场景 1. 数据验证</li>
+<li>场景 2. 按需取数据</li>
+<li>场景 3. 自动更新页面</li>
+<li>…</li>
+</ul>
+</blockquote>
+<p>说了这么多，接下来来点干货。</p>
+<h2 id="创建ajax的步骤"><a href="#创建ajax的步骤" class="headerlink" title="创建ajax的步骤"></a>创建ajax的步骤</h2><blockquote>
+<p>Ajax的原理简单来说通过<code>XMLHttpRequest</code>对象来向服务器发异步请求，从服务器获得数据，然后用javascript来操作DOM而更新页面。这其中最关键的一步就是从服务器获得请求数据。原生创建ajax可分为以下四步</p>
+</blockquote>
+<h3 id="1、创建XMLHttpRequest对象"><a href="#1、创建XMLHttpRequest对象" class="headerlink" title="1、创建XMLHttpRequest对象"></a>1、创建XMLHttpRequest对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function createRequest ()&#123;</div><div class="line">    if (window.XMLHttpRequest) &#123;</div><div class="line">        //IE6以上</div><div class="line">        xhr = new XMLHttpRequest();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">    &#125;</div><div class="line">    return xhr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、准备请求"><a href="#2、准备请求" class="headerlink" title="2、准备请求"></a>2、准备请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(method,url,async);</div></pre></td></tr></table></figure>
+<ul>
+<li><p>第一个参数表示请求类型的字符串，其值可以是<code>GET</code>或者<code>POST</code><br><code>GET</code>请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;GET&quot;,demo.php?name=hzzly&amp;age=21,true);</div></pre></td></tr></table></figure>
+<p><code>POST</code>请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;POST&quot;,demo.php,true);</div></pre></td></tr></table></figure>
+</li>
+<li><p>第二个参数是要作为请求发送目标的URL。</p>
+</li>
+<li><p>第三个参数是true或false，表示请求是以异步还是同步的模式发出。（默认为true，一般不建议为false）</p>
+</li>
+</ul>
+<h3 id="3、发送请求"><a href="#3、发送请求" class="headerlink" title="3、发送请求"></a>3、发送请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.send();</div></pre></td></tr></table></figure>
+<ul>
+<li><p><code>GET</code>请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;GET&quot;,demo.php?name=hzzly&amp;age=21,true);</div><div class="line">xhr.send();</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>POST</code>请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;POST&quot;,demo.php,true);</div><div class="line">xhr.setRequestHeder(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded;charset=UTF-8&quot;);</div><div class="line">xhr.send(param)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4、处理响应"><a href="#4、处理响应" class="headerlink" title="4、处理响应"></a>4、处理响应</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">xhr.onreadystatechange = function()&#123;</div><div class="line">    if(xhr.readyState == 4 &amp;&amp; xhr.status == 200)&#123;</div><div class="line">        console.log(xhr.responseText);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><p><code>onreadystatechange</code>：当处理过程发生变化的时候执行下面的函数</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;   readyState</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>  ：ajax处理过程</p>
+<ul>
+<li>0：请求未初始化（还没有调用 <code>open()</code>）</li>
+<li>1：请求已经建立，但是还没有发送（还没有调用 <code>send()</code>）</li>
+<li>2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）</li>
+<li>3：请求在处理中；通常响应中已有部分数据可用了，但是服务器还没有完成响应的生成</li>
+<li>4：响应已完成；您可以获取并使用服务器的响应了</li>
+</ul>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;   status</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>  属性:</p>
+<ul>
+<li>200: “OK”</li>
+<li>404: 未找到页面</li>
+</ul>
+<ul>
+<li><code>responseText</code>：获得字符串形式的响应数据，可以用<code>JSON.parse(xhr.responseText)</code>转化为<code>JSON</code>对象</li>
+</ul>
+</blockquote>
+<h2 id="封装例子"><a href="#封装例子" class="headerlink" title="封装例子"></a>封装例子</h2><blockquote>
+<p>1.get请求函数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 一个简单的get请求</div><div class="line"> * @param &#123;String&#125;   url     请求地址,文件名</div><div class="line"> * @param &#123;Function&#125; fnSucc  请求成功时执行的函数</div><div class="line"> * @param &#123;Function&#125; fnFaild 请求失败执行的函数</div><div class="line"> */</div><div class="line">function Get(url, fnSucc, fnFaild) &#123;</div><div class="line">    //1.创建ajax对象</div><div class="line">    var xhr = null;</div><div class="line">        /**</div><div class="line">         * 此处必须需要使用window.的方式,表示为window对象的一个属性.不存在时值为undefined.</div><div class="line">         * 进入else若直接使用XMLHttpRequest在不支持的情况下会报错</div><div class="line">         **/</div><div class="line">    if (window.XMLHttpRequest) &#123;</div><div class="line">        //IE6以上</div><div class="line">        xhr = new XMLHttpRequest();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">    &#125;</div><div class="line">    //2.连接服务器</div><div class="line">    //open(方法,url,是否异步)</div><div class="line">    xhr.open(&quot;GET&quot;, url, true);</div><div class="line">    //3.发送请求</div><div class="line">    xhr.send();</div><div class="line">    //4.接收返回</div><div class="line">    //OnRedayStateChange事件</div><div class="line">    xhr.onreadystatechange = function () &#123;</div><div class="line">        if (xhr.readyState === 4) &#123;</div><div class="line">            if (xhr.status === 200) &#123;</div><div class="line">                //alert(&quot;成功&quot; + xhr.responseText);</div><div class="line">                fnSucc(xhr.responseText);</div><div class="line">            &#125; else &#123;</div><div class="line">                //alert(&quot;服务器响应失败!&quot;);</div><div class="line">                if (fnFaild) &#123;</div><div class="line">                    fnFaild();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>2.get与post结合的请求函数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * AJAX函数封装</div><div class="line"> * @param &#123;string&#125; url     请求地址（必须）</div><div class="line"> * @param &#123;object&#125; options 发送请求的选项参数</div><div class="line"> *   @config &#123;string&#125; [options.type] 请求发送的类型。默认为GET。</div><div class="line"> *   @config &#123;Object&#125; [options.data] 需要发送的数据。</div><div class="line"> *   @config &#123;Function&#125; [options.onsuccess] 请求成功时触发。（必须）</div><div class="line"> *   @config &#123;Function&#125; [options.onfail] 请求失败时触发。</div><div class="line"> */</div><div class="line">function AJAX(url, options) &#123;</div><div class="line">    //1.创建ajax对象</div><div class="line">    var xhr = null;</div><div class="line">        /**</div><div class="line">         * 此处必须需要使用window.的方式,表示为window对象的一个属性.不存在时值为undefined,进入else</div><div class="line">         * 若直接使用XMLHttpRequest,在不支持的情况下会报错</div><div class="line">         **/</div><div class="line">    if (window.XMLHttpRequest) &#123;</div><div class="line">        //IE6以上</div><div class="line">        xhr = new XMLHttpRequest();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</div><div class="line">    &#125;</div><div class="line">    //2.连接服务器</div><div class="line">    //open(方法,url,是否异步)</div><div class="line">    var param = &quot;&quot;; //请求参数。</div><div class="line">    //只有data存在，且为对象使才执行</div><div class="line">    var data = options.data ? options.data : -1; //缓存data</div><div class="line">    if (typeof (data) === &quot;object&quot;) &#123;</div><div class="line">        for (var key in data) &#123; //请求参数拼接</div><div class="line">            if (data.hasOwnProperty(key)) &#123;</div><div class="line">                param += `$&#123;key&#125;=$&#123;data[key]&#125;&amp;`;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        param.replace(/&amp;$/, &quot;&quot;);</div><div class="line">    &#125; else &#123;</div><div class="line">        param = &quot;timestamp=&quot; + new Date().getTime();</div><div class="line">    &#125;</div><div class="line">    //3.发送请求</div><div class="line">    var type = options.type ? options.type.toUpperCase() : &quot;GET&quot;;</div><div class="line">    if (type === &quot;GET&quot;) &#123;</div><div class="line">        xhr.open(&quot;GET&quot;, `$&#123;url&#125;?$&#123;param&#125;`, true);</div><div class="line">        xhr.send();</div><div class="line">    &#125; else &#123;</div><div class="line">        xhr.open(&quot;POST&quot;, url, true);</div><div class="line">        xhr.setRequestHeder(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded;charset=UTF-8&quot;);</div><div class="line">        xhr.send(param);</div><div class="line">    &#125;</div><div class="line">    //4.接收返回</div><div class="line">    //OnRedayStateChange事件</div><div class="line">    xhr.onreadystatechange = function () &#123;</div><div class="line">        if (xhr.readyState === 4) &#123;</div><div class="line">            if (xhr.status === 200) &#123;</div><div class="line">                //请求成功。形参为获取到的字符串形式的响应数据</div><div class="line">                options.onsuccess(xhr.responseText);</div><div class="line">            &#125; else &#123;</div><div class="line">                //先判断是否存在请求失败函数</div><div class="line">                //存在时，形参为XMLHttpRequest对象，便于进行错误进行处理</div><div class="line">                if (options.onfail) &#123;</div><div class="line">                    options.onfail(xhr);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/07/20/Ajax封装/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-分析css中选择器的效率" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1412,105 +1567,6 @@
 
 
   
-    <article id="post-Javascript基础总结六(数据类型和Json）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/18/Javascript基础总结六(数据类型和Json）/">Javascript基础总结六(数据类型和Json）</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/18/Javascript基础总结六(数据类型和Json）/" class="archive-article-date">
-  	<time datetime="2016-03-18T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="什么是JSON"><a href="#什么是JSON" class="headerlink" title="什么是JSON"></a>什么是JSON</h2><p><code>JSON</code>：JavaScript 对象表示法（<code>J</code>ava<code>S</code>cript <code>O</code>bject <code>N</code>otation）。</p>
-<p><code>JSON</code>的形式是用大括号<code>“{}”</code>包围起来的项目列表，每一个项目间用逗号（,）分隔，而项目就是用冒号（:）分隔的属性名和属性值。这是典型的字典表示形式，也再次表明<code>javascript</code>里的对象就是字典结构。不管多么复杂的对象，都可以用一句<code>JSON</code>代码来创建并赋值。在<code>JSON</code>中，名称/值对 包括字段名称（在双引号中），后面写一个冒号，然后是值</p>
-<h2 id="JSON-结构"><a href="#JSON-结构" class="headerlink" title="JSON 结构"></a>JSON 结构</h2><p>JSON有两种结构</p>
-<p><code>json</code>简单说就是<code>javascript</code>中的对象和数组，所以这两种结构就是对象和数组两种结构，通过这两种结构可以表示各种复杂的结构</p>
-<p><strong>1、对象</strong>：对象在js中表示为<code>“{}”</code>括起来的内容，数据结构为 <code>{key：value,key：value,...}</code>的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象<code>.key</code> 获取属性值，这个属性值的类型可以是 数字、字符串、数组、对象几种。</p>
-<p><strong>2、数组：</strong>数组在js中是中括号<code>“[]”</code>括起来的内容，数据结构为 <code>[&quot;java&quot;,&quot;javascript&quot;,&quot;vb&quot;,...]</code>，取值方式和所有语言中一样，使用索引获取，字段值的类型可以是 数字、字符串、数组、对象几种。<br>经过对象、数组2种结构就可以组合成复杂的数据结构了。</p>
-<h2 id="JSON-语法规则"><a href="#JSON-语法规则" class="headerlink" title="JSON 语法规则"></a><strong>JSON 语法规则</strong></h2><p><code>JSON</code> 语法是 <code>JavaScript</code> 对象表示法语法的子集。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">数据在名称/值对中</div><div class="line">数据由逗号分隔</div><div class="line">花括号保存对象</div><div class="line">方括号保存数组</div></pre></td></tr></table></figure>
-<p><code>JSON</code> 值可以是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">数字（整数或浮点数）</div><div class="line">字符串（在双引号中）</div><div class="line">逻辑值（true 或 false）</div><div class="line">数组（在方括号中）</div><div class="line">对象（在花括号中）</div><div class="line">null</div></pre></td></tr></table></figure>
-<p>除以上6种外，再无其他，没有像js一样的undefined、NAN</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1） 并列的数据之间用逗号（&quot;, &quot;）分隔。</div><div class="line"></div><div class="line">2） 映射用冒号（&quot;: &quot;）表示。</div><div class="line"></div><div class="line">3） 并列数据的集合（数组）用方括号(&quot;[]&quot;)表示。</div><div class="line"></div><div class="line">4） 映射的集合（对象）用大括号（&quot;&#123;&#125;&quot;）表示。</div></pre></td></tr></table></figure>
-<p>对象是一套无序的名/值对，一个对象以左边分支开始，以右边分支结束<br><img src="http://segmentfault.com/img/bVcXW0" alt="img"></p>
-<p>一个值可以是用双引号括起来的字符串，或者是一个数值，一个<code>true or false</code> ，一个数组或者一个对象<br><img src="http://segmentfault.com/img/bVcXW5" alt="img"></p>
-<h2 id="JSON与对象字面量"><a href="#JSON与对象字面量" class="headerlink" title="JSON与对象字面量"></a>JSON与对象字面量</h2><p>在编程语言中,字面量是一种表示值的记法。<br><code>JSON</code>规定键-值对中的<code>键</code>必须用双引号！ 引号。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;first name&quot; : &quot;Mike&quot;&#125;;</div></pre></td></tr></table></figure>
-<p>在<code>JSON</code>字符串中，不能使用函数或者正则表达式字面量</p>
-<h2 id="数据类型："><a href="#数据类型：" class="headerlink" title="数据类型："></a><strong>数据类型：</strong></h2><p>从结构上看，所有的数据（data）最终都可以分解成三种类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">第一种类型是标量（scalar），也就是一个单独的字符串（string）或数字（numbers），比如&quot;北京&quot;这个单独的词。</div><div class="line"></div><div class="line">第二种类型是序列（sequence），也就是若干个相关的数据按照一定顺序并列在一起，又叫做数组（array）或列表（List），比如&quot;北京，上海&quot;。</div><div class="line"></div><div class="line">第三种类型是映射（mapping），也就是一个名/值对（Name/value），即数据有一个名称，还有一个与之相对应的值，这又称作散列（hash）或字典（dictionary），比如&quot;首都：北京&quot;。</div></pre></td></tr></table></figure>
-<p>在编程语言中，只要有了数组（array）和对象（object）就能够储存一切数据了。</p>
-<p>数组和对象的另一个区别是，数组的数据没有”名称”（name），对象的数据有”名称”（name）。</p>
-<p><code>JavaScript</code>中有5种简单数据类型（也称为基本数据类型）：<code>Undefined</code>、<code>Null</code>、<code>Boolean</code>、<code>Number</code>和<code>String</code>。还有1种复杂数据类型——<code>Object</code>，<code>Object</code>本质上是由一组无序的名值对组成的。</p>
-<p>对一个值使用<code>typeof</code>操作符可能返回下列某个字符串：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&quot;undefined&quot;——如果这个值未定义；</div><div class="line"></div><div class="line">&quot;boolean&quot;——如果这个值是布尔值；</div><div class="line"></div><div class="line">&quot;string&quot;——如果这个值是字符串；</div><div class="line"></div><div class="line">&quot;number&quot;——如果这个值是数值；</div><div class="line"></div><div class="line">&quot;object&quot;——如果这个值是对象或null；</div><div class="line"></div><div class="line">&quot;function&quot;——如果这个值是函数；</div></pre></td></tr></table></figure>
-<h3 id="Undefined类型："><a href="#Undefined类型：" class="headerlink" title="Undefined类型："></a>Undefined类型：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    `Undefined`类型只有一个值，在使用var声明变量但未对其加以初始化时，</div><div class="line">这个变量的值就是undefined</div></pre></td></tr></table></figure>
-<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h3><p>　　Null类型是第二个只有一个值的数据类型，这个特殊的值是null。从逻辑角度来看，null值表示一个空对象指针，而这也正是使用typeof操作符检测null时会返回”object”的原因，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var car = null;</div><div class="line">alert(typeof car); // &quot;object&quot;</div></pre></td></tr></table></figure>
-<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a>Number类型</h3><p>　　这种类型用来表示整数和浮点数值，还有一种特殊的数值，即NaN（非数值 Not a Number）。这个数值用于表示一个本来要返回数值的操作数未返回数值的情况（这样就不会抛出错误了）。</p>
-<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h3><p>　　<code>String</code>类型用于表示由零或多个16位<code>Unicode</code>字符组成的字符序列，即字符串。字符串可以由单引号(‘)或双引号(“)表示。</p>
-<p>数值、布尔值、对象和字符串值都有<code>toString()</code>方法。但<code>null</code>和<code>undefined</code>值没有这个方法。</p>
-<p>　　多数情况下，调用<code>toString()</code>方法不必传递参数。但是，在调用数值的<code>toString()</code>方法时，可以传递一个参数：输出数值的基数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var num = 10;</div><div class="line">alert(num.toString());      //&quot;10&quot;</div><div class="line">alert(num.toString(2));     //&quot;1010&quot;</div><div class="line">alert(num.toString(8));     //&quot;12&quot;</div><div class="line">alert(num.toString(10));    //&quot;10&quot;</div><div class="line">alert(num.toString(16));    //&quot;a&quot;</div></pre></td></tr></table></figure>
-<p>在不知道要转换的值是不是<code>null</code>或<code>undefined</code>的情况下，还可以使用转型函数<code>String()</code>，这个函数能够将任何类型的值转换为字符串。<code>String()</code>函数遵循下列转换规则：</p>
-<p>　　● 如果值有<code>toString()</code>方法，则调用该方法（没有参数）并返回相应的结果</p>
-<p>　　● 如果值是<code>null</code>，则返回”<code>null</code>“</p>
-<p>　　● 如果值是<code>undefined</code>，则返回”<code>undefined</code>“</p>
-<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h3><p>　　对象其实就是一组数据和功能的集合。对象可以通过执行<code>new</code>操作符后跟要创建的对象类型的名称来创建。而创建<code>Object</code>类型的实例并为其添加属性和（或）方法，就可以创建自定义对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var o = new Object();</div></pre></td></tr></table></figure>
-<h2 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var s = &quot;Nicholas&quot;;</div><div class="line">    var b =true;</div><div class="line">    var c = 21;</div><div class="line">    var u;</div><div class="line">    var n = null;</div><div class="line">    var o = &#123;&#125;;</div><div class="line">    var obj = new Object;//最好写出new object()形式</div><div class="line"></div><div class="line">    alert(typeof s);//string</div><div class="line">    alert(typeof b);//boolean</div><div class="line">    alert(typeof c);//number</div><div class="line">    alert(typeof u);//undefined</div><div class="line">    alert(typeof n);//object</div><div class="line">    alert(typeof o);//object</div><div class="line">    alert(typeof obj);//object</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/18/Javascript基础总结六(数据类型和Json）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1608,11 +1664,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">相册</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">相册</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
