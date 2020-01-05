@@ -174,6 +174,197 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Javascript基础总结七(Ajax+http）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/20/Javascript基础总结七(Ajax+http）/">Javascript基础总结七(Ajax+http）</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/20/Javascript基础总结七(Ajax+http）/" class="archive-article-date">
+  	<time datetime="2016-03-20T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Ajax及其工作原理"><a href="#Ajax及其工作原理" class="headerlink" title="Ajax及其工作原理"></a>Ajax及其工作原理</h2><p>AJAX 是一种与服务器交换数据无需刷新网页的技术，最早由Google公司在谷歌地图里使用，并迅速风靡。</p>
+<p>AJAX是不能跨域的，如需跨域，可以使用<code>document.domain=&#39;a.com&#39;；</code>或者使用服务器代理，代理XMLHttpRequest文件</p>
+<p>AJAX是基于现有的Internet标准，并且联合使用它们：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">XMLHttpRequest 对象 (异步的与服务器交换数据)</div><div class="line">JavaScript/DOM (信息显示/交互)</div><div class="line">CSS (给数据定义样式)</div><div class="line">XML (作为转换数据的格式)</div></pre></td></tr></table></figure>
+<p><img src="https://segmentfault.com/img/bVc36v" alt="img"></p>
+<h2 id="创建-XMLHttpRequest-对象"><a href="#创建-XMLHttpRequest-对象" class="headerlink" title="创建 XMLHttpRequest 对象"></a>创建 XMLHttpRequest 对象</h2><p>所有现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 <code>XMLHttpRequest</code> 对象。</p>
+<p><strong>创建Ajax对象：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//IE6以上</div><div class="line">var oAjax = new XMLHttpRequest();</div><div class="line"></div><div class="line">//IE6</div><div class="line">var oAjax =new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)</div></pre></td></tr></table></figure>
+<h2 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">oAjax.open(方法,url,是否异步)</div></pre></td></tr></table></figure>
+<p>我们都知道，Ajax即“<code>Asynchronous Javascript And XML</code>”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。所以，Ajax天生就是工作在异步模式的（异步为true，同步false）</p>
+<h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><p>同步是指：发送方发出数据后，等接收方发回响应以后才发下一个数据包的通讯方式。<br>异步是指：发送方发出数据后，不等接收方发回响应，接着发送下个数据包的通讯方式。<br>（简单点说：同步就是只能一件一件事的来做，而异步就是可以多件事同时进行）</p>
+<h2 id="发送请求send"><a href="#发送请求send" class="headerlink" title="发送请求send()"></a>发送请求send()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">function getDoc()&#123;</div><div class="line">    var xmlhttp;</div><div class="line">    if(window.xmlhttpRequest)&#123;</div><div class="line">        xmlhttp=new XMLHttpRequest();</div><div class="line">    &#125;</div><div class="line">    else&#123;</div><div class="line">        xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);//for IE6</div><div class="line">    &#125;</div><div class="line">    xmlhttp.onreadystatechange = function()&#123;</div><div class="line">        if(xmlhttp.readyState==4&amp;&amp;xmlhttp.status==200)&#123;</div><div class="line">            document.getElementById(&quot;￼myId&quot;).innerHTML=xmlhttp.responseText;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    xmlhttp.open(&quot;￼GET&quot;, index.php,true);</div><div class="line">    xmlhttp.send();</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;button type=&quot;button&quot; onclick=&quot;getDoc()&quot;&gt;请求数据&lt;/button&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<p><strong>GET 还是 POST？</strong></p>
+<p>与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。</p>
+<p>然而，在以下情况中，请使用 POST 请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">无法使用缓存文件（更新服务器上的文件或数据库）</div><div class="line">向服务器发送大量数据（POST 没有数据量限制）</div><div class="line">发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠</div></pre></td></tr></table></figure>
+<h2 id="接收返回信息"><a href="#接收返回信息" class="headerlink" title="接收返回信息"></a>接收返回信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">oAjax.onreadystatechange = function()&#123;   //当请求状态改变时要调用的事件处理器</div><div class="line"></div><div class="line">    alert(oAjax.readystate);           </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>只要<code>readyState</code>属性的值发生变化时，便会触发一次<code>readyStatechange</code>事件。可以利用这个事件来检测每次状态变化后readyState的值。通常，我们只对readyState值为4的阶段感兴趣，因为这时所有数据都已经就绪，不过，必须在调用<code>open()</code>之前指定<code>onreadystatechange</code>事件处理程序才能确保跨浏览器兼容性。下面来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var xhr = createXHR();</div><div class="line">xhr.onreadystatechange = function () &#123;</div><div class="line">    if (xhr.readyState == 4) &#123;</div><div class="line">        if ((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304) &#123;</div><div class="line">            alert(xhr.statusText);</div><div class="line">        &#125; else &#123;</div><div class="line">            alert(&quot;Request was unsuccessful: &quot; + xhr.status);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(&quot;get&quot;, &quot;example.txt&quot;, true);</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure>
+<h3 id="XHR对象"><a href="#XHR对象" class="headerlink" title="XHR对象"></a>XHR对象</h3><p><code>XMLHttpRequest</code>这个对象的属性：</p>
+<p><strong>它的属性有：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">onreadystatechange  每次状态改变所触发事件的事件处理程序。</div><div class="line"></div><div class="line">responseText     从服务器进程返回数据的字符串形式。</div><div class="line">responseXML    从服务器进程返回的DOM兼容的文档数据对象。</div><div class="line"></div><div class="line">status           从服务器返回的数字代码，比如常见的404（未找到）和200（已就绪）</div><div class="line"></div><div class="line">status Text       伴随状态码的字符串信息</div></pre></td></tr></table></figure>
+<p>当XHR对象把一个HTTP请求发送到服务器的过程中会经历几个状态，直到请求被处理，然后才接收一个回应。<code>readyState</code>就是XHR请求的状态属性，它本身有5个属性值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">0（未初始化）还没有调用open()方法</div><div class="line">1（载入）已调用send()方法，正在发送请求</div><div class="line">2(载入完成)send()方法完成，已收到全部响应内容</div><div class="line">3(解析)正在解析响应内容</div><div class="line">4（完成）响应内容解析完成，可以再客户端使用了</div></pre></td></tr></table></figure>
+<h2 id="http状态码"><a href="#http状态码" class="headerlink" title="http状态码"></a>http状态码</h2><p><strong>1字头：</strong>消息。这一类型的状态码，代表请求已被接受，需要继续处理。<br><strong>2字头：</strong>成功。这一类型的状态码，代表请求已成功被服务器接收、理解、并接受。<br><strong>3字头：</strong><a href="http://segmentfault.com/blog/trigkit4/1190000000682468#articleHeader2" target="_blank" rel="external">重定向</a>。这类状态码代表需要客户端采取进一步的操作才能完成请求。<br><strong>4字头：</strong>客户端错误。这类状态码代表了客户端看起来可能发生错误，妨碍了服务器的处理。<br><strong>5字头</strong>：服务器错误。这类状态码代表了服务器在处理请求的过程中有错误或者异常状态发生</p>
+<p><strong>另附：</strong><a href="http://tool.oschina.net/commons?type=5" target="_blank" rel="external">http状态码详解</a><br>w3cschool HTTP 状态消息：<a href="http://www.w3school.com.cn/tags/html_ref_httpmessages.asp" target="_blank" rel="external">http://www.w3school.com.cn/ta…</a></p>
+<p><img src="https://segmentfault.com/img/bVdezN" alt="img"></p>
+<h2 id="status和statusText"><a href="#status和statusText" class="headerlink" title="status和statusText"></a>status和statusText</h2><p>　　<code>statusText</code>是响应返回的文本信息，仅当<code>readyState</code>值为3或4的时候才能使用。当<code>readyState</code>为其它值时视图存取<code>statusText</code>属性将引发异常。</p>
+<h2 id="XHR的方法"><a href="#XHR的方法" class="headerlink" title="XHR的方法"></a>XHR的方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abort()</td>
+<td>导致当前正在执行的请求被取消</td>
+</tr>
+<tr>
+<td>getAllResponseHeaders()</td>
+<td>返回包含所有响应头的名称和值的单个字符</td>
+</tr>
+<tr>
+<td>getResponseHeader(name)</td>
+<td>返回响应头中指定的名称和值</td>
+</tr>
+<tr>
+<td>open(method,url,async,username,pwd)</td>
+<td>设置HTTP方法（get或post）等</td>
+</tr>
+<tr>
+<td>send(content)</td>
+<td>发出带有指定主体内容的请求</td>
+</tr>
+<tr>
+<td>setRequestHeader(name,value)</td>
+<td>使用指定的名称和值设置请求头</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">        var oAjax =oAjax();</div><div class="line">        alert(oAjax.readyState);//弹出&quot;0&quot;</div><div class="line">        oAjax.open(&quot;get&quot;,&quot;index.html&quot;,true);</div><div class="line">        alert(oAjax.readyState);//弹出&quot;1&quot;</div><div class="line">        oAjax.send(null);</div><div class="line">        alert(oAjax.readyState);//IE下弹出4,而firefox是2</div><div class="line">        //可以通过readystatechange事件监听</div><div class="line">        oAjax = XHR();</div><div class="line">        oAjax.onreadystatechange = function () &#123;</div><div class="line">            alert(oAjax.readyState);//Firefox下依次是1,2,3,4但最后还会再来个1</div><div class="line">            //IE下则是1,1,3,4</div><div class="line">        &#125;;</div><div class="line">        oAjax.open(&quot;get&quot;,&quot;index.txt&quot;,true);</div><div class="line">        oAjax.send(null);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="jQuery中的Ajax"><a href="#jQuery中的Ajax" class="headerlink" title="jQuery中的Ajax"></a>jQuery中的Ajax</h2><p><code>.load()</code>方法是局部方法，因为他需要一个包含元素的<code>jQuery</code>对象作为前缀，而<code>$.get()</code>和<code>$.post()</code>是全局方法，无需指定某个元素，对于用途而言，<code>.load()</code>适合做静态文件的异步获取，而对于需要传递参数到服务器页面的，<code>$.get()</code>和<code>$.post()</code>更加合适。</p>
+<p>GET和POST传入的data是一个键值对 对象，不同的是GET传入的data是通过地址栏传输的，而POST是通过表单提交的，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(function () &#123;</div><div class="line">    $(&quot;input&quot;).click(function () &#123;</div><div class="line">        $.get(&apos;test.php?url=baidu.com&apos;, function (response,status,xhr) &#123;</div><div class="line">            $(&apos;#box&apos;).html(response);</div><div class="line">        &#125;)</div><div class="line">    &#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>POST</code>提交不能使用<code>url</code>传参。<code>post</code>提交可以使用字符串形式的键值对形式传参，自动转换为http消息实体传参</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(function () &#123;</div><div class="line">    $(&quot;input&quot;).click(function () &#123;</div><div class="line">        $.post(&apos;test.php&apos;,&apos;url=baidu.com&apos;, function (response,status,xhr) &#123;</div><div class="line">            $(&apos;#box&apos;).html(response);</div><div class="line">        &#125;)</div><div class="line">    &#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//post提交可以使用对象键值对</div><div class="line"></div><div class="line">$(function () &#123;</div><div class="line">    $(&quot;input&quot;).click(function () &#123;</div><div class="line">        $.post(&apos;test.php&apos;,&#123;</div><div class="line">                url:&apos;baidu.com&apos;//post提交可以使用对象键值对</div><div class="line">            &#125;, function (response,status,xhr) &#123;</div><div class="line">            $(&apos;#box&apos;).html(response);</div><div class="line">        &#125;)</div><div class="line">    &#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>$.get()</code>方法有四个参数，前面三个参数和<code>.load()</code>一样，多了一个第四参数<code>type</code>，即服务器返回的内容格式，包括<code>xml,json,script,html,text</code>等，第一个参数为必选参数，后面三个为可选参数</p>
+<p><code>$.ajax()</code>是所有Ajax方法中最底层的方法，所有其他方法都是基于<code>$.ajax()</code>方法的封装，这个方法只有一个参数，传递一个<br>各个功能键值对的对象。</p>
+<h3 id="ajax-方法对象参数列表"><a href="#ajax-方法对象参数列表" class="headerlink" title="$.ajax()方法对象参数列表"></a>$.ajax()方法对象参数列表</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>发送请求的地址</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>请求方法，默认GET</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>Number</td>
+<td>设置请求超时的时间</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object或String</td>
+<td>发送到服务器的对象，键值对字符串或对象</td>
+</tr>
+<tr>
+<td>datatype</td>
+<td>String</td>
+<td>返回的数据类型，比如html，XML，json等</td>
+</tr>
+<tr>
+<td>success</td>
+<td>Function</td>
+<td>请求成功后调用的回调函数</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>Function</td>
+<td>请求完成后调用的回调函数</td>
+</tr>
+<tr>
+<td>error</td>
+<td>Function</td>
+<td>请求失败后调用的回调函数</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$(function () &#123;</div><div class="line">    $(&quot;input&quot;).click(function () &#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            type : &quot;POST&quot;,</div><div class="line">            url: &apos;test.php&apos;,</div><div class="line">            data:&#123;</div><div class="line">                url: &apos;baidu.com&apos;</div><div class="line">            &#125;,</div><div class="line">            success : function(response,status,xhr)&#123;</div><div class="line">                $(&apos;#box&apos;).html(response);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="表单序列化"><a href="#表单序列化" class="headerlink" title="表单序列化"></a>表单序列化</h3><p><code>Ajax</code>用的最多的地方莫过于表单操作，而传统的表单操作是通过<code>submit</code>提交将数据传输到服务器，如果使用<code>Ajax</code>异步处理<br>的话，我们需要将每个表单元素获取才能提交，这样工作效率就大大降低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;form action=&quot;&quot;&gt;</div><div class="line">    用户名: &lt;input type=&quot;text&quot; name=&quot;user&quot; /&gt;</div><div class="line">    邮件: &lt;input type=&quot;text&quot; name=&quot;email&quot; /&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;提交&quot;/&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">&lt;div id=&quot;box&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    $(function () &#123;</div><div class="line">        $(&quot;form input[type=button]&quot;).click(function () &#123;</div><div class="line">            $.ajax(&#123;</div><div class="line">                type: &apos;POST&apos;,</div><div class="line">                url: &apos;test.php&apos;,</div><div class="line">                data: &#123;</div><div class="line">                    user: $(&apos;form input[name=user]&apos;).val(),</div><div class="line">                    email: $(&quot;form input[name=email]&quot;).val(),</div><div class="line">                &#125;,</div><div class="line">                success: function(response)&#123;</div><div class="line">                    $(&quot;#box&quot;).html(response);</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">        &#125;)</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<p>表单元素特别多的情况下应采用表单序列化，即<code>data:$(“form”).serialize();</code>//得到的是字符串键值对，并且对<code>url</code>进行编码</p>
+<p><code>serialize()</code>方法不但可以序列化表单内的元素，还可以直接获取单选框，复选框和下拉列表框等内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;form action=&quot;&quot;&gt;</div><div class="line">    用户名: &lt;input type=&quot;text&quot; name=&quot;user&quot; /&gt;</div><div class="line">    邮件: &lt;input type=&quot;text&quot; name=&quot;email&quot; /&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;提交&quot;/&gt;</div><div class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;男&quot;/&gt;男</div><div class="line">    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;女&quot;/&gt;女</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;submit&quot;/&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">&lt;div id=&quot;box&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    $(function () &#123;</div><div class="line">        $(&quot;form input[name=sex]&quot;).click(function () &#123;</div><div class="line">            $(&apos;#box&apos;).html(decodeURIComponent($(this).serialize()));</div><div class="line">        &#125;)</div><div class="line">    &#125;)</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<h2 id="传统Ajax问题"><a href="#传统Ajax问题" class="headerlink" title="传统Ajax问题"></a>传统Ajax问题</h2><p>传统的<code>ajax</code>有如下的问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">1、可以无刷新改变页面内容，但无法改变页面URL</div><div class="line"></div><div class="line">2、为了更好的可访问性，内容发生改变后，通常改变URL的hash</div><div class="line"></div><div class="line">3、hash的方式不能很好的处理浏览器的前进、后退等问题</div><div class="line"></div><div class="line">4、进而浏览器引入了onhashchange的接口，不支持的浏览器只能定时去判断hash是否改变</div><div class="line"></div><div class="line">5、但这种方式对搜索引擎很不友好</div><div class="line"></div><div class="line">6、twitter和google约定了使用#!xxx（即hash第一个字符为!），搜索引擎进行支持。</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/20/Javascript基础总结七(Ajax+http）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Javascript基础总结六(数据类型和Json）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1178,7 +1369,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 Guohui
+    		&copy; 2020 Guohui
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1261,11 +1452,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">相册</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">相册</a>
               </li>
             
             <div class="clearfix"></div>

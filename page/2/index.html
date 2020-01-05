@@ -174,6 +174,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-sessionStorage与localStorage" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/06/sessionStorage与localStorage/">sessionStorage与localStorage</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/06/sessionStorage与localStorage/" class="archive-article-date">
+  	<time datetime="2017-02-06T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<ul>
+<li>sessionStorage 数据的存储仅特定于某个会话中，也就是说数据只保持到浏览器关闭，当浏览器关闭后重新打开这个页面时， 之前的存储已经被清除。</li>
+<li>localStorage 是一个持久化的存储，它并不局限于会话。除非主动删除数据，否则数据是永远不会过期的。</li>
+</ul>
+</blockquote>
+<h3 id="一、localStorage和sessionStorage操作"><a href="#一、localStorage和sessionStorage操作" class="headerlink" title="一、localStorage和sessionStorage操作"></a>一、localStorage和sessionStorage操作</h3><blockquote>
+<p>localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
+</blockquote>
+<h3 id="1-setItem存储value"><a href="#1-setItem存储value" class="headerlink" title="1.setItem存储value"></a>1.setItem存储value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.setItem(&quot;name&quot;, &quot;hzzly&quot;);</div><div class="line">localStorage.setItem(&quot;blog&quot;, &quot;hzzly.github.io&quot;);</div></pre></td></tr></table></figure>
+<h3 id="2-getItem获取value"><a href="#2-getItem获取value" class="headerlink" title="2.getItem获取value"></a>2.getItem获取value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let name = sessionStorage.getItem(&quot;name&quot;);</div><div class="line">let blog = localStorage.getItem(&quot;blog&quot;);</div></pre></td></tr></table></figure>
+<h3 id="3-removeItem删除key"><a href="#3-removeItem删除key" class="headerlink" title="3.removeItem删除key"></a>3.removeItem删除key</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.removeItem(&quot;name&quot;);</div><div class="line">localStorage.removeItem(&quot;blog&quot;);</div></pre></td></tr></table></figure>
+<h3 id="4-clear清除所有的key-value"><a href="#4-clear清除所有的key-value" class="headerlink" title="4.clear清除所有的key/value"></a>4.clear清除所有的key/value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.clear();</div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
+<h3 id="5-其他操作方法：点操作和"><a href="#5-其他操作方法：点操作和" class="headerlink" title="5.其他操作方法：点操作和[]"></a>5.其他操作方法：点操作和[]</h3><blockquote>
+<p>web Storage不但可以用自身的setItem,getItem等方便存取，也可以像普通对象一样用点(.)操作符，及[]的方式进行数据存储及读取，像如下的代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">localStorage.name = &quot;hzzly&quot;; </div><div class="line">localStorage[&quot;age&quot;] = &quot;21&quot;; </div><div class="line">sessionStorage.name = &quot;hzzly&quot;; </div><div class="line">sessionStorage[&quot;age&quot;] = &quot;21&quot;;</div><div class="line">//取</div><div class="line">let name1 = localStorage.name</div><div class="line">let age1 = localStorage[&quot;age&quot;]</div><div class="line">let name2 = sessionStorage.name</div><div class="line">let age2 = sessionStorage[&quot;age&quot;]</div></pre></td></tr></table></figure>
+<h3 id="6-localStorage和sessionStorage的key和length属性实现遍历"><a href="#6-localStorage和sessionStorage的key和length属性实现遍历" class="headerlink" title="6.localStorage和sessionStorage的key和length属性实现遍历"></a>6.localStorage和sessionStorage的key和length属性实现遍历</h3><blockquote>
+<p>sessionStorage和localStorage提供的key()和length可以方便的实现存储的数据遍历，例如下面的代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var storage = window.localStorage; </div><div class="line">for (var i=0, len = storage.length; i  &lt;  len; i++)&#123;     </div><div class="line">	let key = storage.key(i);     </div><div class="line">	let value = storage.getItem(key);     </div><div class="line">	console.log(key + &quot;=&quot; + value); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="二、实例"><a href="#二、实例" class="headerlink" title="二、实例"></a>二、实例</h3><blockquote>
+<p>storage只能存储字符串的数据，对于JS中常用的数组或对象却不能直接存储，可以用下面两个方法进行转换：</p>
+<ul>
+<li>JSON.stringify() 用于从一个对象解析出字符串</li>
+<li>JSON.parse() 用于从一个字符串中解析出json对象</li>
+</ul>
+</blockquote>
+<h3 id="1-localStorage-sessionStorage存取数组"><a href="#1-localStorage-sessionStorage存取数组" class="headerlink" title="1.localStorage/sessionStorage存取数组"></a>1.localStorage/sessionStorage存取数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">let language = [&apos;HTML/HTML5&apos;, &apos;CSS/CSS3&apos;, &apos;JavaScript&apos;, &apos;Vue&apos;, &apos;React&apos;]</div><div class="line">localStorage.language = JSON.stringify(language)</div><div class="line">sessionStorag.language = JSON.stringify(language)</div><div class="line">//取</div><div class="line">let storageLanguage = JSON.parse(localStorage.language)</div></pre></td></tr></table></figure>
+<h3 id="2-localStorage存取对象"><a href="#2-localStorage存取对象" class="headerlink" title="2.localStorage存取对象"></a>2.localStorage存取对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">let myInfo = &#123;</div><div class="line">	&apos;name&apos;: &apos;hzzly&apos;,</div><div class="line">	&apos;age&apos;: 21,</div><div class="line">	&apos;school&apos;: &apos;ECUT&apos;,</div><div class="line">	&apos;city&apos;: &apos;NanChang&apos;</div><div class="line">&#125;</div><div class="line">localStorage.myInfo = JSON.stringify(myInfo)</div><div class="line">sessionStorag.myInfo = JSON.stringify(myInfo)</div><div class="line">//取</div><div class="line">let storageLanguage = JSON.parse(localStorage.myInfo)</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/06/sessionStorage与localStorage/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Express与MongoDB的缠绵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -605,79 +695,6 @@
 
 
   
-    <article id="post-利用canvas实现时钟效果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/08/利用canvas实现时钟效果/">利用canvas实现时钟效果</a>
-    </h1>
-  
-
-        
-        <a href="/2016/12/08/利用canvas实现时钟效果/" class="archive-article-date">
-  	<time datetime="2016-12-08T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>你需要知道的：</strong></p>
-<blockquote>
-<p><code>canvas</code>标签只是图形容器，您必须使用脚本来绘制图形。默认大小：宽300px，高150px;</p>
-<p><code>getContext()</code> 方法可返回一个对象，该对象提供了用于在画布上绘图的方法和属性。——获取上下文对象。<br><code>getContext(&quot;2d&quot;)</code> 对象属性和方法，可用于在画布上绘制文本、线条、矩形、圆形等等。</p>
-<p><code>fillRect(l,t,w,h)：</code>默认颜色是黑色 <code>strokeRect(l,t,w,h):</code>带边框的方块。默认一像素黑色边框</p>
-<p><code>setInterval()</code> 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。</p>
-<p><code>beginPath()：</code>定义开始绘制路径, 它把当前的点设置为 (0,0)。 当一个画布的环境第一次创建，beginPath()<br>方法会被显式地调用。<br><code>closePath()：</code>结束绘制路径（将起点与终点进行连接）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 绘制圆形</div></pre></td></tr></table></figure>
-<p><code>arc</code>（ x,y,半径,起始弧度，结束弧度,旋转方向）<br>x,y：起始位置<br>弧度与角度的关系：弧度=角度*Math.PI/180<br>旋转方向：顺时针（默认：false，逆时针：true）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html lang=&quot;en-US&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">        &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">        &lt;title&gt;&lt;/title&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">                window.onload = function()&#123;</div><div class="line">                        var oC = document.getElementById(&apos;ch1&apos;);</div><div class="line">                        var oGC = oC.getContext(&apos;2d&apos;);</div><div class="line"></div><div class="line">                        function drawClock()&#123;</div><div class="line">                                var x = 200;   //指定坐标</div><div class="line">                                var y = 200;</div><div class="line">                                var r = 150;  //指定钟表半径</div><div class="line"></div><div class="line">                                oGC.clearRect(0,0,oC.width,oC.height);//清空画布</div><div class="line"></div><div class="line">                                var oDate = new Date();      //创建日期对象</div><div class="line">                                var oHours = oDate.getHours();//获取时间</div><div class="line">                                var oMin = oDate.getMinutes();</div><div class="line">                                var oSen = oDate.getSeconds();</div><div class="line"></div><div class="line">                                var oHoursValue = (-90 + oHours*30 + oMin/2)*Math.PI/180; //设置时针的值</div><div class="line">                                var oMinValue = (-90 + oMin*6)*Math.PI/180;</div><div class="line">                                var oSenValue = (-90 + oSen*6)*Math.PI/180;</div><div class="line"></div><div class="line">                                oGC.beginPath();//开始</div><div class="line"></div><div class="line">                                for(var i=0;i&lt;60;i++)&#123;         //i为60，代表着时钟的60个小刻度</div><div class="line">                                        oGC.moveTo(x,y);</div><div class="line">                                        oGC.arc(x,y,r,6*i*Math.PI/180,6*(i+1)*Math.PI/180,false); //循环从6度到12度</div><div class="line">                                &#125;</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.fillStyle =&apos;white&apos;; //覆盖住小刻度的黑色线</div><div class="line">                                oGC.beginPath();</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line">                                oGC.arc(x,y,r*19/20,0,360*(i+1)*Math.PI/180,false);</div><div class="line"></div><div class="line">                                oGC.closePath();//结束</div><div class="line">                                oGC.fill();</div><div class="line"></div><div class="line">                                oGC.lineWidth = 3; //设置时钟圆盘大刻度的粗细值</div><div class="line">                                oGC.beginPath();  //开始画大的时钟刻度</div><div class="line"></div><div class="line">                                for(i=0;i&lt;12;i++)&#123;              //i为12，代表着时钟刻度的12大格</div><div class="line">                                        oGC.moveTo(x,y);</div><div class="line">                                        oGC.arc(x,y,r,30*i*Math.PI/180,30*(i+1)*Math.PI/180,false); // 间隔为30度，弧度=角度*Math.PI/180</div><div class="line">                                &#125;</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.fillStyle =&apos;white&apos;; //覆盖住大刻度的黑色线</div><div class="line">                                oGC.beginPath();</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line">                                oGC.arc(x,y,r*18/20,360*(i+1)*Math.PI/180,false);</div><div class="line"></div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.fill();//表盘完成 </div><div class="line"></div><div class="line">                                oGC.lineWidth = 5;//设置时针宽度</div><div class="line">                                oGC.beginPath();//开始绘制时针</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line"></div><div class="line">                                oGC.arc(x,y,r*10/20,oHoursValue,oHoursValue,false);//设置时针大小和弧度</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.lineWidth = 3;//设置分针宽度</div><div class="line">                                oGC.beginPath();//开始绘制分针</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line"></div><div class="line">                                oGC.arc(x,y,r*14/20,oMinValue,oMinValue,false);//设置分针大小和弧度</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.lineWidth = 1;//设置秒针宽度</div><div class="line">                                oGC.beginPath();//开始绘制秒针</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line"></div><div class="line">                                oGC.arc(x,y,r*19/20,oSenValue,oSenValue,false);//设置秒针大小和弧度</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line">                        &#125;</div><div class="line">                        setInterval(drawClock,1000);//设置定时器，让时钟运转起来</div><div class="line">                                drawClock();</div><div class="line">                &#125;;</div><div class="line">        &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">        &lt;canvas id = &quot;ch1&quot; width = &quot;400px&quot; height = &quot;400px&quot;&gt;&lt;/canvas&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>点击下方result查看演示：<br><a href="http://jsfiddle.net/eh02450b/2/" target="_blank" rel="external">http://jsfiddle.net/eh02450b/2/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/08/利用canvas实现时钟效果/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-JavaScript实现常用排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -799,6 +816,79 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/12/08/JavaScript实现常用排序算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-利用canvas实现时钟效果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/08/利用canvas实现时钟效果/">利用canvas实现时钟效果</a>
+    </h1>
+  
+
+        
+        <a href="/2016/12/08/利用canvas实现时钟效果/" class="archive-article-date">
+  	<time datetime="2016-12-08T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>你需要知道的：</strong></p>
+<blockquote>
+<p><code>canvas</code>标签只是图形容器，您必须使用脚本来绘制图形。默认大小：宽300px，高150px;</p>
+<p><code>getContext()</code> 方法可返回一个对象，该对象提供了用于在画布上绘图的方法和属性。——获取上下文对象。<br><code>getContext(&quot;2d&quot;)</code> 对象属性和方法，可用于在画布上绘制文本、线条、矩形、圆形等等。</p>
+<p><code>fillRect(l,t,w,h)：</code>默认颜色是黑色 <code>strokeRect(l,t,w,h):</code>带边框的方块。默认一像素黑色边框</p>
+<p><code>setInterval()</code> 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。</p>
+<p><code>beginPath()：</code>定义开始绘制路径, 它把当前的点设置为 (0,0)。 当一个画布的环境第一次创建，beginPath()<br>方法会被显式地调用。<br><code>closePath()：</code>结束绘制路径（将起点与终点进行连接）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 绘制圆形</div></pre></td></tr></table></figure>
+<p><code>arc</code>（ x,y,半径,起始弧度，结束弧度,旋转方向）<br>x,y：起始位置<br>弧度与角度的关系：弧度=角度*Math.PI/180<br>旋转方向：顺时针（默认：false，逆时针：true）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html lang=&quot;en-US&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">        &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">        &lt;title&gt;&lt;/title&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">                window.onload = function()&#123;</div><div class="line">                        var oC = document.getElementById(&apos;ch1&apos;);</div><div class="line">                        var oGC = oC.getContext(&apos;2d&apos;);</div><div class="line"></div><div class="line">                        function drawClock()&#123;</div><div class="line">                                var x = 200;   //指定坐标</div><div class="line">                                var y = 200;</div><div class="line">                                var r = 150;  //指定钟表半径</div><div class="line"></div><div class="line">                                oGC.clearRect(0,0,oC.width,oC.height);//清空画布</div><div class="line"></div><div class="line">                                var oDate = new Date();      //创建日期对象</div><div class="line">                                var oHours = oDate.getHours();//获取时间</div><div class="line">                                var oMin = oDate.getMinutes();</div><div class="line">                                var oSen = oDate.getSeconds();</div><div class="line"></div><div class="line">                                var oHoursValue = (-90 + oHours*30 + oMin/2)*Math.PI/180; //设置时针的值</div><div class="line">                                var oMinValue = (-90 + oMin*6)*Math.PI/180;</div><div class="line">                                var oSenValue = (-90 + oSen*6)*Math.PI/180;</div><div class="line"></div><div class="line">                                oGC.beginPath();//开始</div><div class="line"></div><div class="line">                                for(var i=0;i&lt;60;i++)&#123;         //i为60，代表着时钟的60个小刻度</div><div class="line">                                        oGC.moveTo(x,y);</div><div class="line">                                        oGC.arc(x,y,r,6*i*Math.PI/180,6*(i+1)*Math.PI/180,false); //循环从6度到12度</div><div class="line">                                &#125;</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.fillStyle =&apos;white&apos;; //覆盖住小刻度的黑色线</div><div class="line">                                oGC.beginPath();</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line">                                oGC.arc(x,y,r*19/20,0,360*(i+1)*Math.PI/180,false);</div><div class="line"></div><div class="line">                                oGC.closePath();//结束</div><div class="line">                                oGC.fill();</div><div class="line"></div><div class="line">                                oGC.lineWidth = 3; //设置时钟圆盘大刻度的粗细值</div><div class="line">                                oGC.beginPath();  //开始画大的时钟刻度</div><div class="line"></div><div class="line">                                for(i=0;i&lt;12;i++)&#123;              //i为12，代表着时钟刻度的12大格</div><div class="line">                                        oGC.moveTo(x,y);</div><div class="line">                                        oGC.arc(x,y,r,30*i*Math.PI/180,30*(i+1)*Math.PI/180,false); // 间隔为30度，弧度=角度*Math.PI/180</div><div class="line">                                &#125;</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.fillStyle =&apos;white&apos;; //覆盖住大刻度的黑色线</div><div class="line">                                oGC.beginPath();</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line">                                oGC.arc(x,y,r*18/20,360*(i+1)*Math.PI/180,false);</div><div class="line"></div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.fill();//表盘完成 </div><div class="line"></div><div class="line">                                oGC.lineWidth = 5;//设置时针宽度</div><div class="line">                                oGC.beginPath();//开始绘制时针</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line"></div><div class="line">                                oGC.arc(x,y,r*10/20,oHoursValue,oHoursValue,false);//设置时针大小和弧度</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.lineWidth = 3;//设置分针宽度</div><div class="line">                                oGC.beginPath();//开始绘制分针</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line"></div><div class="line">                                oGC.arc(x,y,r*14/20,oMinValue,oMinValue,false);//设置分针大小和弧度</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line"></div><div class="line">                                oGC.lineWidth = 1;//设置秒针宽度</div><div class="line">                                oGC.beginPath();//开始绘制秒针</div><div class="line">                                oGC.moveTo(x,y);</div><div class="line"></div><div class="line">                                oGC.arc(x,y,r*19/20,oSenValue,oSenValue,false);//设置秒针大小和弧度</div><div class="line">                                oGC.closePath();</div><div class="line">                                oGC.stroke();</div><div class="line">                        &#125;</div><div class="line">                        setInterval(drawClock,1000);//设置定时器，让时钟运转起来</div><div class="line">                                drawClock();</div><div class="line">                &#125;;</div><div class="line">        &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">        &lt;canvas id = &quot;ch1&quot; width = &quot;400px&quot; height = &quot;400px&quot;&gt;&lt;/canvas&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>点击下方result查看演示：<br><a href="http://jsfiddle.net/eh02450b/2/" target="_blank" rel="external">http://jsfiddle.net/eh02450b/2/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/08/利用canvas实现时钟效果/">展开全文 >></a>
         </p>
       
 
@@ -1356,207 +1446,6 @@
 
 
   
-    <article id="post-jQuery使用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/jQuery使用总结/">jQuery使用总结</a>
-    </h1>
-  
-
-        
-        <a href="/2016/08/12/jQuery使用总结/" class="archive-article-date">
-  	<time datetime="2016-08-12T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="window-onload-和-document-ready"><a href="#window-onload-和-document-ready" class="headerlink" title="window.onload 和$(document).ready()"></a>window.onload 和$(document).ready()</h2><table>
-<thead>
-<tr>
-<th>我</th>
-<th>window.onload</th>
-<th>$(document).ready()</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>执行时机</td>
-<td>必须等待网页中所有的内容加载完毕后（包括图片）才能执行</td>
-<td>网页中所有DOM结构绘制完毕后就执行，可能DOM元素关联的东西并没有加载完</td>
-</tr>
-<tr>
-<td>编写个数</td>
-<td>不能同时编写多个，以下代码无法正确执行：window.onload =function({alert(“test1”);}window.onload = function(){alert(“test2”);}结果只会输出”test2”</td>
-<td>能同时编写多个</td>
-</tr>
-<tr>
-<td>简化写法</td>
-<td>无</td>
-<td>$(document).ready(function(){});可以简写成$(function(){});</td>
-</tr>
-</tbody>
-</table>
-<h2 id="逐行分析jQuery"><a href="#逐行分析jQuery" class="headerlink" title="逐行分析jQuery"></a>逐行分析jQuery</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">     (21,94) 定义了一些变量和函数 jquery = function()&#123;&#125;; </div><div class="line">     （96，283）给JQ对象，添加一些方法和属性</div><div class="line">     （283，347）extend：JQ的继承方法</div><div class="line">     （349，817）jQuery.extend():扩展一些工具方法</div><div class="line">     （887，2859）Sizzle：复杂选择器的实现</div><div class="line">     （2880，3042）callbacks：回调对象</div><div class="line">     （8826）window.jQuery = window.$ = jQuery ;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
-<p>像$(“div”)返回的就是一个对象，对象后面就可以添加属性和方法<br>类似$.trim()，$.proxy()这些方法就是工具方法，他的前面不是对象，而是$，$ 就是函数，在函数下面扩展方法就是扩展静态方法，就是工具方法。工具方法即可给jquery使用，也可以给原生的js使用　</p>
-<hr>
-<p>1.创建DOM元素：<br>可以通过向$()函数传递一个包含HTML标记的字符串动态地创建DOM元素。例如，可以创建一个新的段落元素。如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;&lt;p&gt;Hi&lt;/p&gt;&quot;)</div></pre></td></tr></table></figure>
-<p>2.通过索引获取元素<br>因为jQuery允许我们将包装集当成javascript数组，所以我们可以使用简单的数组下标来获取包装序列中的任何元素。比如，从页面上带有alt属性的所有<code>&lt;img&gt;</code>元素的包装集中获取第一个元素，可以使用如下语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var img = $(&apos;img[alt]&apos;)[0];</div></pre></td></tr></table></figure>
-<ol>
-<li>解决双重提交问题</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&quot;form&quot;).submit(function()&#123;</div><div class="line">    $(&quot;:submit&quot;,this).attr(&quot;disabled&quot;,&quot;disabled&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>我们通过:submit选择器获取表单中的所有提交按钮，并且将其disabled属性设置为”disabled”，this指针总是指向触发此事件的页面元素，在这里，this指向表单实例（form）</p>
-<p>4.添加多个类名<br>我们可以为每个元素指定任意数量的类名，在HTML中，class属性用来提供以空格分隔，由多个类名组成的字符串。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div class = &quot;one two three&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
-<h2 id="一、选择网页元素"><a href="#一、选择网页元素" class="headerlink" title="一、选择网页元素"></a>一、选择网页元素</h2><p>　　jQuery的基本设计和主要用法，就是”选择某个网页元素，然后对其进行某种操作”。这是它区别于其他函数库的根本特点。<br>　　使用jQuery的第一步，往往就是将一个选择表达式，放进构造函数jQuery()（简写为$），然后得到被选中的元素。</p>
-<p><strong>选择表达式可以是CSS选择器：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. $(document)//选择整个文档对象  </div><div class="line">2. </div><div class="line"></div><div class="line">3. $(&apos;#myId&apos;)//选择ID为myId的网页元素  </div><div class="line">4. </div><div class="line"></div><div class="line">5. $(&apos;div.myClass&apos;)//选择class为myClass的div元素  </div><div class="line">6. </div><div class="line"></div><div class="line">7. $(&apos;input[name=first]&apos;)//选择name属性等于first的input元素</div></pre></td></tr></table></figure>
-<p><strong>也可以是jQuery特有的表达式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;a:first&apos;)//选择网页中第一个a元素  </div><div class="line">2. </div><div class="line"></div><div class="line">3. $(&apos;tr:odd&apos;)//选择表格的奇数行  </div><div class="line">4. </div><div class="line"></div><div class="line">5. $(&apos;#myForm :input&apos;)//选择表单中的input元素  </div><div class="line">6. </div><div class="line"></div><div class="line">7. $(&apos;div:visible&apos;) //选择可见的div元素  </div><div class="line">8. </div><div class="line"></div><div class="line">9. $(&apos;div:gt(2)&apos;)//选择所有的div元素，除了前三个  </div><div class="line">10. </div><div class="line"></div><div class="line">11. $(&apos;div:animated&apos;)//选择当前处于动画状态的div元素</div></pre></td></tr></table></figure>
-<p>　　</p>
-<h2 id="改变结果集"><a href="#改变结果集" class="headerlink" title="改变结果集"></a>改变结果集</h2><p>　　如果选中多个元素，jQuery提供过滤器，可以缩小结果集：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(&apos;div&apos;).has(&apos;p&apos;); //选择包含p元素的div元素  </div><div class="line">$(&apos;div&apos;).not(&apos;.myClass&apos;); //选择class不等于myClass的div元素  </div><div class="line">$(&apos;div&apos;).filter(&apos;.myClass&apos;); //选择class等于myClass的div元素  </div><div class="line">$(&apos;div&apos;).first(); //选择第1个div元素  </div><div class="line">$(&apos;div&apos;).eq(5); //选择第6个div元素</div></pre></td></tr></table></figure>
-<p>有时候，我们需要从结果集出发，移动到附近的相关元素，jQuery也提供了在<code>DOM</code>树上的移动方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;div&apos;).next(&apos;p&apos;); //选择div元素后面的第一个p元素  </div><div class="line"></div><div class="line"></div><div class="line">2. $(&apos;div&apos;).parent(); //选择div元素的父元素  </div><div class="line"></div><div class="line"></div><div class="line">3. $(&apos;div&apos;).closest(&apos;form&apos;); //选择离div最近的那个form父元素  </div><div class="line"></div><div class="line"></div><div class="line">4. $(&apos;div&apos;).children(); //选择div的所有子元素  </div><div class="line"></div><div class="line"></div><div class="line">5. $(&apos;div&apos;).siblings(); //选择div的同级元素</div></pre></td></tr></table></figure>
-<h2 id="链式操作"><a href="#链式操作" class="headerlink" title="链式操作"></a>链式操作</h2><p>　　选中网页元素以后，就可以对它进行某种操作。<br>　　jQuery允许将所有操作连接在一起，以链条的形式写出来，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;div&apos;).find(&apos;h3&apos;).eq(2).html(&apos;Hello&apos;);</div></pre></td></tr></table></figure>
-<p>　分解开来，就是下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;div’)                 //找到div元素  </div><div class="line"></div><div class="line">2. .find(&apos;h3’)           //选择其中的h3元素 </div><div class="line"> </div><div class="line">3. .eq(2)               //选择第3个h3元素  </div><div class="line"></div><div class="line">4. .html(&apos;Hello&apos;);  //将它的内容改为Hello</div></pre></td></tr></table></figure>
-<p>　　这是<code>jQuery</code>最令人称道、最方便的特点。它的原理在于每一步的jQuery操作，返回的都是一个<code>jQuery</code>对象，所以不同操作可以连在一起。</p>
-<p><strong>那么，如何判断是否可以使用jquery链式操作呢？</strong></p>
-<p>除了获取某些数据的函数，比如获取属性值”<code>attr(name)</code>“,获取集合大小”<code>size()</code>“，这些函数明显是返回数据的。除了这些函数之外的jquery函数都可以用于链式操作，比如设置属性<code>attr(name.value)</code></p>
-<p>　<code>jQuery</code>还提供了<code>.end()</code>方法，使得结果集可以后退一步：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;div&apos;)  </div><div class="line">2. .find(&apos;h3&apos;)  </div><div class="line">3. .eq(2)  </div><div class="line">4. .html(&apos;Hello&apos;)  </div><div class="line">5. .end()//退回到选中所有的h3元素的那一步  </div><div class="line">6. .eq(0)//选中第一个h3元素  </div><div class="line">7. .html(&apos;World&apos;); //将它的内容改为World</div></pre></td></tr></table></figure>
-<p><code>.end()：</code>回到最近的一个”破坏性”操作之前。如果之前没有破坏性操作，则返回一个空集。所谓的”破坏性”就是指任何改变所匹配的jQuery元素的操作。</p>
-<p>示例<br><strong>描述：</strong>选取所有的p元素，查找并选取span子元素，然后再回过来选取p元素</p>
-<p><strong>HTML 代码:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;&lt;span&gt;Hello&lt;/span&gt;,how are you?&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p><strong>jQuery 代码:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;p&quot;).find(&quot;span&quot;).end()</div></pre></td></tr></table></figure>
-<p><strong>结果:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;&lt;span&gt;Hello&lt;/span&gt; how are you?&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p><br></p>
-<h2 id="四、元素的操作：取值和赋值"><a href="#四、元素的操作：取值和赋值" class="headerlink" title="四、元素的操作：取值和赋值"></a>四、元素的操作：取值和赋值</h2><p>　　操作网页元素，最常见的需求是取得它们的值，或者对它们进行赋值。<br>　　jQuery使用同一个函数，来完成取值（getter）和赋值（setter）。到底是取值还是赋值，由函数的参数决定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;h1&apos;).html(); //html()没有参数，表示取出h1的值 </div><div class="line">2. $(&apos;h1&apos;).html(&apos;Hello&apos;); //html()有参数Hello，表示对h1进行赋值</div></pre></td></tr></table></figure>
-<p>常见的取值和赋值函数如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. .html() 返回或设置被选元素的内容 (inner HTML)    </div><div class="line">2. .text() 取出或设置text内容      </div><div class="line">3. .attr() 取出或设置某个属性的值       </div><div class="line">4. .width() 取出或设置某个元素的宽度     </div><div class="line">5. .height() 取出或设置某个元素的高度  </div><div class="line">6. .val() 取出或设置html内容 取出某个表单元素的值</div></pre></td></tr></table></figure>
-<p>　　需要注意的是，如果结果集包含多个元素，那么赋值的时候，将对其中所有的元素赋值；取值的时候，则是只取出第一个元素的值（<code>.text()</code>例外，它取出所有元素的text内容）。</p>
-<h2 id="五、元素的操作：移动"><a href="#五、元素的操作：移动" class="headerlink" title="五、元素的操作：移动"></a>五、元素的操作：移动</h2><p><code>.insertAfter()</code>，把div元素移动p元素后面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&apos;div&apos;).insertAfter(&apos;p&apos;);</div></pre></td></tr></table></figure>
-<p><code>.after()</code>，把p元素加到div元素前面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&apos;p&apos;).after(&apos;div&apos;);</div></pre></td></tr></table></figure>
-<p>使用这种模式的操作方法，一共有四对</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. .insertAfter()和.after()：在现存元素的外部，从后面插入元素  </div><div class="line"> </div><div class="line"></div><div class="line">2. .insertBefore()和.before()：在现存元素的外部，从前面插入元素  </div><div class="line"></div><div class="line"></div><div class="line">3. .appendTo()和.append()：在现存元素的内部，从后面插入元素  </div><div class="line"></div><div class="line"></div><div class="line">4. .prependTo()和.prepend()  ：在现存元素的内部，从前面插入元素</div></pre></td></tr></table></figure>
-<p>相关方法的详细使用请查看我的另一篇文章：<a href="http://segmentfault.com/blog/trigkit4/1190000000660257" target="_blank" rel="external">jquery常用方法详解</a></p>
-<h2 id="六、元素的操作：复制、删除和创建"><a href="#六、元素的操作：复制、删除和创建" class="headerlink" title="六、元素的操作：复制、删除和创建"></a><strong>六</strong>、元素的操作：复制、删除和创建</h2><p>　　复制元素使用<code>.clone()</code><br>　　删除元素使用<code>.remove()</code>和<code>.detach()</code>。两者的区别在于，前者不保留被删除元素的事件，后者保留，有利于重新插入文档时使用。<br>　　清空元素内容（但是不删除该元素）使用<code>.empty()</code>。<br>　　创建新元素的方法非常简单，只要把新元素直接传入<code>jQuery</code>的构造函数就行了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">* $(&apos;&lt;p&gt;Hello&lt;/p&gt;&apos;);  </div><div class="line">* $(&apos;&lt;li class=&quot;new&quot;&gt;new list item&lt;/li&gt;&apos;);  </div><div class="line">* $(&apos;ul&apos;).append(&apos;&lt;li&gt;list item&lt;/li&gt;&apos;);</div></pre></td></tr></table></figure>
-<h2 id="七、工具方法"><a href="#七、工具方法" class="headerlink" title="七、工具方法"></a>七、工具方法</h2><p>　　除了对选中的元素进行操作以外，jQuery还提供一些工具方法（utility），不必选中元素，就可以直接使用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">工具方法即可给jquery使用，也可以给原生的js使用</div></pre></td></tr></table></figure>
-<p>常用的工具方法有以下几种：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">1. $.trim() 去除字符串两端的空格。</div><div class="line">2.   </div><div class="line">3. $.each() 遍历一个数组或对象。  </div><div class="line">4. </div><div class="line"></div><div class="line">5. $.inArray() 返回一个值在数组中的索引位置。如果该值不在数组中，则返回-1。  </div><div class="line">6. </div><div class="line"></div><div class="line">7. $.grep() 返回数组中符合某种标准的元素。   </div><div class="line">8. </div><div class="line"></div><div class="line">9. $.extend() 将多个对象，合并到第一个对象。   </div><div class="line">10. </div><div class="line"></div><div class="line">11. $.makeArray() 将对象转化为数组。  </div><div class="line">12. </div><div class="line"></div><div class="line">13. $.type() 判断对象的类别（函数对象、日期对象、数组对象、正则对象等等）。  </div><div class="line">14. </div><div class="line"></div><div class="line">15. $.isArray() 判断某个参数是否为数组。  </div><div class="line">16. </div><div class="line"></div><div class="line">17. $.isEmptyObject() 判断某个对象是否为空（不含有任何属性）。  </div><div class="line">18. </div><div class="line"></div><div class="line">19. $.isFunction() 判断某个参数是否为函数。  </div><div class="line">20. </div><div class="line"></div><div class="line">21. $.isPlainObject() 判断某个参数是否为用&quot;&#123;&#125;&quot;或&quot;new Object&quot;建立的对象。  </div><div class="line">22. </div><div class="line"></div><div class="line">23. $.support() 判断浏览器是否支持某个特性。</div></pre></td></tr></table></figure>
-<h2 id="八、事件操作"><a href="#八、事件操作" class="headerlink" title="八、事件操作"></a>八、事件操作</h2><p>　jQuery可以对网页元素绑定事件。根据不同的事件，运行相应的函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;p&apos;).click(function()&#123;  </div><div class="line">2. alert(&apos;Hello&apos;);  </div><div class="line">3. &#125;);</div></pre></td></tr></table></figure>
-<p>目前，jQuery主要支持以下事件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">1. .blur() 表单元素失去焦点。  </div><div class="line">2. .change() 表单元素的值发生变化  </div><div class="line">3. .click() 鼠标单击  </div><div class="line">4. .dblclick() 鼠标双击  </div><div class="line">5. .focus() 表单元素获得焦点  </div><div class="line">6. .focusin() 子元素获得焦点  </div><div class="line">7. .focusout() 子元素失去焦点  </div><div class="line">8. .hover() 同时为mouseenter和mouseleave事件指定处理函数  </div><div class="line">9. .keydown() 按下键盘（长时间按键，只返回一个事件）  </div><div class="line">10. .keypress() 按下键盘（长时间按键，将返回多个事件）  </div><div class="line">11. .keyup() 松开键盘  </div><div class="line">12. .load() 元素加载完毕  </div><div class="line">13. .mousedown() 按下鼠标  </div><div class="line">14. .mouseenter() 鼠标进入（进入子元素不触发）  </div><div class="line">15. .mouseleave() 鼠标离开（离开子元素不触发）  </div><div class="line">16. .mousemove() 鼠标在元素内部移动  </div><div class="line">17. .mouseout() 鼠标离开（离开子元素也触发）  </div><div class="line">18. .mouseover() 鼠标进入（进入子元素也触发）  </div><div class="line">19. .mouseup() 松开鼠标  </div><div class="line">20. .ready() DOM加载完成  </div><div class="line">21. .resize() 浏览器窗口的大小发生改变  </div><div class="line">22. .scroll() 滚动条的位置发生变化  </div><div class="line">23. .select() 用户选中文本框中的内容  </div><div class="line">24. .submit() 用户递交表单  </div><div class="line">25. .toggle() 根据鼠标点击的次数，依次运行多个函数  </div><div class="line">26. .unload()  </div><div class="line">27. 用户离开页面</div></pre></td></tr></table></figure>
-<p>　　以上这些事件在jQuery内部，都是.bind()的便捷方式。使用.bind()可以更灵活地控制事件，比如为多个事件绑定同一个函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;input&apos;).bind(  </div><div class="line">2. &apos;click change&apos;， //同时绑定click和change事件  </div><div class="line">3. function()&#123;  </div><div class="line">4. alert(&apos;Hello&apos;);  </div><div class="line">5. &#125;  </div><div class="line">6. );</div></pre></td></tr></table></figure>
-<p>有时，你只想让事件运行一次，这时可以使用.one()方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. $(&quot;p&quot;).one(&quot;click&quot;， function()&#123;  </div><div class="line">2. alert(&quot;Hello&quot;); //只运行一次，以后的点击不会运行  </div><div class="line">3. &#125;);</div></pre></td></tr></table></figure>
-<p><code>.unbind()</code>用来解除事件绑定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;p&apos;).unbind(&apos;click&apos;);</div></pre></td></tr></table></figure>
-<p>所有的事件处理函数，都可以接受一个事件对象(event object)作为参数，比如下面例子中的e：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. $(&quot;p&quot;).click(function(e)&#123;  </div><div class="line">2. alert(e.type); //&quot;click&quot;  </div><div class="line">3. &#125;);</div></pre></td></tr></table></figure>
-<p>　　这个事件对象有一些很有用的属性和方法：</p>
-<blockquote>
-<p><code>event.pageX</code> 事件发生时，鼠标距离网页左上角的水平距离 　　<br><code>event.pageY</code> 事件发生时，鼠标距离网页左上角的垂直距离<br><code>event.type</code> 事件的类型（比如click） 　　</p>
-</blockquote>
-<p><code>event.which</code> 按下了哪一个键 　　<br><code>event.data</code>在事件对象上绑定数据，然后传入事件处理函数 　　<br><code>event.target</code> 事件针对的网页元素</p>
-<blockquote>
-<p><code>event.preventDefault()</code> 阻止事件的默认行为（比如点击链接，会自动打开新页面）<br><code>event.stopPropagation()</code> 停止事件向上层元素冒泡</p>
-</blockquote>
-<p>　　在事件处理函数中，可以用<code>this</code>关键字，返回事件针对的<code>DOM</code>元素：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">* $(&apos;a&apos;).click(function()&#123;  </div><div class="line">* if ($(this).attr(&apos;href&apos;).match(&apos;evil&apos;))&#123;//如果确认为有害链接  </div><div class="line">* e.preventDefault(); //阻止打开  </div><div class="line">* $(this).addClass(&apos;evil&apos;); //加上表示有害的class  </div><div class="line">* &#125;  </div><div class="line">* &#125;);</div></pre></td></tr></table></figure>
-<p>　　有两种方法，可以自动触发一个事件。一种是直接使用事件函数，另一种是使用.trigger()或.triggerHandler()。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$(&apos;a&apos;).click();</div><div class="line">$(&apos;a&apos;).trigger(&apos;click&apos;);</div></pre></td></tr></table></figure>
-<p><br></p>
-<h2 id="九、特殊效果"><a href="#九、特殊效果" class="headerlink" title="九、特殊效果"></a>九、特殊效果</h2><p>　　jQuery允许对象呈现某些特殊效果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&apos;h1&apos;).show(); //展现一个h1标题</div></pre></td></tr></table></figure>
-<p><strong>常用的特殊效果如下：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.fadeIn() 淡入</div><div class="line">.fadeOut() 淡出</div><div class="line">.fadeTo() 调整透明度</div><div class="line">.hide() 隐藏元素</div><div class="line">.show() 显示元素</div><div class="line">.slideDown() 向下展开</div><div class="line">.slideUp() 向上卷起</div><div class="line">.slideToggle() 依次展开或卷起某个元素</div><div class="line">.toggle() 依次展示或隐藏某个元素</div></pre></td></tr></table></figure>
-<p>除了.show()和.hide()，所有其他特效的默认执行时间都是400ms(毫秒)，但是你可以改变这个设置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">* $(&apos;h1&apos;).fadeIn(300); // 300毫秒内淡入  </div><div class="line">* $(&apos;h1&apos;).fadeOut(&apos;slow&apos;); //缓慢地淡出</div></pre></td></tr></table></figure>
-<p>　　在特效结束后，可以指定执行某个函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;p&apos;).fadeOut(300, function()&#123;$(this).remove(); &#125;);</div></pre></td></tr></table></figure>
-<p>　更复杂的特效，可以用<code>.animate()</code>自定义。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">1. $(&apos;div&apos;).animate(  </div><div class="line">2. &#123;  </div><div class="line">3. left : &quot;+=50&quot;，//不断右移  </div><div class="line">4. opacity : 0.25 //指定透明度  </div><div class="line">5. &#125;,</div><div class="line">6. 300,// 持续时间  </div><div class="line">7. function()&#123; alert(&apos;done!&apos;); &#125;//回调函数  </div><div class="line">8. );</div></pre></td></tr></table></figure>
-<p>　　<code>.stop()</code>和<code>.delay()</code>用来停止或延缓特效的执行。<br>　　<code>$.fx.off</code>如果设置为<code>true</code>，则关闭所有网页特效。</p>
-<h2 id="几个常见的筛选选择器"><a href="#几个常见的筛选选择器" class="headerlink" title="几个常见的筛选选择器"></a>几个常见的筛选选择器</h2><p><code>filter()：</code>筛选出与指定表达式匹配的元素集合。这个方法用于缩小匹配的范围。用逗号分隔多个表达式<br><strong>描述：</strong>保留子元素中不含有ol的元素。</p>
-<p><strong>HTML 代码:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;&lt;ol&gt;&lt;li&gt;Hello&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;&lt;p&gt;How are you?&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p><strong>jQuery 代码:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&quot;p&quot;).filter(function(index) &#123;</div><div class="line">  return $(&quot;ol&quot;, this).length == 0;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;How are you?&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p><code>silce()：</code>选取一个匹配的子集</p>
-<p><strong>描述：</strong>选择第一个p元素</p>
-<p><strong>HTML 代码:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;cruel&lt;/p&gt;&lt;p&gt;World&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p><strong>jQuery 代码:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;p&quot;).slice(0, 1).wrapInner(&quot;&lt;b&gt;&lt;/b&gt;&quot;);</div></pre></td></tr></table></figure>
-<p><strong>结果:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;&lt;b&gt;Hello&lt;/b&gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p><strong>另附：</strong><a href="http://blog.segmentfault.com/trigkit4/1190000000660257" target="_blank" rel="external">jquery常用方法详解</a><br><br><br>如何使用JQuery CDN？推荐使用官方的<code>CDN</code>节点，使用代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. &lt;script src=&quot;//code.jquery.com/jquery-1.11.0.min.js&quot;&gt; &lt;/script&gt;  </div><div class="line">2. &lt;script src=&quot;//code.jquery.com/jquery-migrate-1.2.1.min.js&quot;&gt; &lt;/script&gt;</div></pre></td></tr></table></figure>
-<p><strong>jquery与原生的关系：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">     &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">          $(function()&#123;</div><div class="line">               $(&apos;#div1&apos;).click(function()&#123;</div><div class="line">                    //alert( $(this).html());                //jq的写法</div><div class="line">                    //alert( this .innerHTML );        //js</div><div class="line">                   </div><div class="line">                    alert( $(this).innerHTML );    //错误的写法，jq与原生不能混用</div><div class="line">                    alert ( this.html());               //也是错误的</div><div class="line">               &#125;)</div><div class="line">              </div><div class="line">          &#125;)</div><div class="line">     &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">     &lt;div id=&quot;div1&quot;&gt;abcd&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/08/12/jQuery使用总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1571,7 +1460,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 Guohui
+    		&copy; 2020 Guohui
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1654,11 +1543,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">相册</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">相册</a>
               </li>
             
             <div class="clearfix"></div>

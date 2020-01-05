@@ -174,6 +174,68 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-博客改为使用Vuepress" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/05/博客改为使用Vuepress/">博客转移Vuepress</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/05/博客改为使用Vuepress/" class="archive-article-date">
+  	<time datetime="2020-01-05T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　这个博客运行大概有4年了吧，但其实自己也没怎么认真去打理，可能是因为没有什么访问量吧，目前发现很多文档其实都用了Vuepress，自己也打算练练手，着手换到Vuepress上。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/05/博客改为使用Vuepress/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-es6模块与 commonJS规范的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -794,96 +856,6 @@
 
 
   
-    <article id="post-sessionStorage与localStorage" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/06/sessionStorage与localStorage/">sessionStorage与localStorage</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/06/sessionStorage与localStorage/" class="archive-article-date">
-  	<time datetime="2017-02-06T12:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<ul>
-<li>sessionStorage 数据的存储仅特定于某个会话中，也就是说数据只保持到浏览器关闭，当浏览器关闭后重新打开这个页面时， 之前的存储已经被清除。</li>
-<li>localStorage 是一个持久化的存储，它并不局限于会话。除非主动删除数据，否则数据是永远不会过期的。</li>
-</ul>
-</blockquote>
-<h3 id="一、localStorage和sessionStorage操作"><a href="#一、localStorage和sessionStorage操作" class="headerlink" title="一、localStorage和sessionStorage操作"></a>一、localStorage和sessionStorage操作</h3><blockquote>
-<p>localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
-</blockquote>
-<h3 id="1-setItem存储value"><a href="#1-setItem存储value" class="headerlink" title="1.setItem存储value"></a>1.setItem存储value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.setItem(&quot;name&quot;, &quot;hzzly&quot;);</div><div class="line">localStorage.setItem(&quot;blog&quot;, &quot;hzzly.github.io&quot;);</div></pre></td></tr></table></figure>
-<h3 id="2-getItem获取value"><a href="#2-getItem获取value" class="headerlink" title="2.getItem获取value"></a>2.getItem获取value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let name = sessionStorage.getItem(&quot;name&quot;);</div><div class="line">let blog = localStorage.getItem(&quot;blog&quot;);</div></pre></td></tr></table></figure>
-<h3 id="3-removeItem删除key"><a href="#3-removeItem删除key" class="headerlink" title="3.removeItem删除key"></a>3.removeItem删除key</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.removeItem(&quot;name&quot;);</div><div class="line">localStorage.removeItem(&quot;blog&quot;);</div></pre></td></tr></table></figure>
-<h3 id="4-clear清除所有的key-value"><a href="#4-clear清除所有的key-value" class="headerlink" title="4.clear清除所有的key/value"></a>4.clear清除所有的key/value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sessionStorage.clear();</div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
-<h3 id="5-其他操作方法：点操作和"><a href="#5-其他操作方法：点操作和" class="headerlink" title="5.其他操作方法：点操作和[]"></a>5.其他操作方法：点操作和[]</h3><blockquote>
-<p>web Storage不但可以用自身的setItem,getItem等方便存取，也可以像普通对象一样用点(.)操作符，及[]的方式进行数据存储及读取，像如下的代码：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">localStorage.name = &quot;hzzly&quot;; </div><div class="line">localStorage[&quot;age&quot;] = &quot;21&quot;; </div><div class="line">sessionStorage.name = &quot;hzzly&quot;; </div><div class="line">sessionStorage[&quot;age&quot;] = &quot;21&quot;;</div><div class="line">//取</div><div class="line">let name1 = localStorage.name</div><div class="line">let age1 = localStorage[&quot;age&quot;]</div><div class="line">let name2 = sessionStorage.name</div><div class="line">let age2 = sessionStorage[&quot;age&quot;]</div></pre></td></tr></table></figure>
-<h3 id="6-localStorage和sessionStorage的key和length属性实现遍历"><a href="#6-localStorage和sessionStorage的key和length属性实现遍历" class="headerlink" title="6.localStorage和sessionStorage的key和length属性实现遍历"></a>6.localStorage和sessionStorage的key和length属性实现遍历</h3><blockquote>
-<p>sessionStorage和localStorage提供的key()和length可以方便的实现存储的数据遍历，例如下面的代码：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var storage = window.localStorage; </div><div class="line">for (var i=0, len = storage.length; i  &lt;  len; i++)&#123;     </div><div class="line">	let key = storage.key(i);     </div><div class="line">	let value = storage.getItem(key);     </div><div class="line">	console.log(key + &quot;=&quot; + value); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="二、实例"><a href="#二、实例" class="headerlink" title="二、实例"></a>二、实例</h3><blockquote>
-<p>storage只能存储字符串的数据，对于JS中常用的数组或对象却不能直接存储，可以用下面两个方法进行转换：</p>
-<ul>
-<li>JSON.stringify() 用于从一个对象解析出字符串</li>
-<li>JSON.parse() 用于从一个字符串中解析出json对象</li>
-</ul>
-</blockquote>
-<h3 id="1-localStorage-sessionStorage存取数组"><a href="#1-localStorage-sessionStorage存取数组" class="headerlink" title="1.localStorage/sessionStorage存取数组"></a>1.localStorage/sessionStorage存取数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">let language = [&apos;HTML/HTML5&apos;, &apos;CSS/CSS3&apos;, &apos;JavaScript&apos;, &apos;Vue&apos;, &apos;React&apos;]</div><div class="line">localStorage.language = JSON.stringify(language)</div><div class="line">sessionStorag.language = JSON.stringify(language)</div><div class="line">//取</div><div class="line">let storageLanguage = JSON.parse(localStorage.language)</div></pre></td></tr></table></figure>
-<h3 id="2-localStorage存取对象"><a href="#2-localStorage存取对象" class="headerlink" title="2.localStorage存取对象"></a>2.localStorage存取对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//存</div><div class="line">let myInfo = &#123;</div><div class="line">	&apos;name&apos;: &apos;hzzly&apos;,</div><div class="line">	&apos;age&apos;: 21,</div><div class="line">	&apos;school&apos;: &apos;ECUT&apos;,</div><div class="line">	&apos;city&apos;: &apos;NanChang&apos;</div><div class="line">&#125;</div><div class="line">localStorage.myInfo = JSON.stringify(myInfo)</div><div class="line">sessionStorag.myInfo = JSON.stringify(myInfo)</div><div class="line">//取</div><div class="line">let storageLanguage = JSON.parse(localStorage.myInfo)</div></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/06/sessionStorage与localStorage/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -898,7 +870,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 Guohui
+    		&copy; 2020 Guohui
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -981,11 +953,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">相册</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">相册</a>
               </li>
             
             <div class="clearfix"></div>
